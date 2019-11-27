@@ -1,0 +1,17 @@
+{
+    "G": 5000,
+    "GCapacity": 5000,
+    "_id": "5c42cd790bde62043d92b3b6",
+    "cooldownTime": 9365416,
+    "energy": 300000,
+    "energyCapacity": 300000,
+    "hits": 1000,
+    "hitsMax": 1000,
+    "notifyWhenAttacked": false,
+    "room": "W31S32",
+    "type": "nuker",
+    "user": "59c59c8c3530f447c0aca65f",
+    "x": 35,
+    "y": 17
+}
+

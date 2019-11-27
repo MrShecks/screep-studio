@@ -1,0 +1,15 @@
+{
+    "_id": "5c42cd790bde62043d92b3b6",
+    "energy": 2500,
+    "energyCapacity": 5000,
+    "hits": 5000,
+    "hitsMax": 5000,
+    "notifyWhenAttacked": true,
+    "power": 75,
+    "powerCapacity": 100,
+    "room": "W7N4",
+    "type": "powerSpawn",
+    "user": "5c30b42b3ca96b042cc6228c",
+    "x": 35,
+    "y": 17
+}

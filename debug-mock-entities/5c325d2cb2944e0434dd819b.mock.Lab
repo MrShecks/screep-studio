@@ -1,0 +1,22 @@
+{
+    "_id": "5c42cd790bde62043d92b3b6",
+    "actionLog": {
+        "runReaction": null
+    },
+    "cooldown": 0,
+    "energy": 2000,
+    "energyCapacity": 2000,
+    "hits": 500,
+    "hitsMax": 500,
+    "mineralAmount": 0,
+    "mineralCapacity": 3000,
+    "mineralType": null,
+    "notifyWhenAttacked": true,
+    "room": "W7N4",
+    "type": "lab",
+    "user": "5c30b42b3ca96b042cc6228c",
+    "x": 35,
+    "y": 17
+}
+
+

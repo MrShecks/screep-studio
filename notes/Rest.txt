@@ -1,0 +1,696 @@
+
+Server Version Info
+---------------------------------------------------------------
+
+Type: GET
+Auth: No
+
+Request:
+
+https://screeps.com/api/version
+
+Response:
+
+{
+  "ok": 1,
+  "package": 145,
+  "protocol": 13,
+  "serverData": {
+    "historyChunkSize": 100,
+    "shards": [
+      "shard0",
+      "shard1",
+      "shard2",
+      "shard3"
+    ]
+  }
+}
+
+Note: Looks like I can use this call to determine if the server supports shards
+
+On my private test server the following response is received
+
+{
+  "ok": 1,
+  "packageVersion": "3.1.7",
+  "protocol": 13,
+  "serverData": {
+    "customObjectTypes": {
+    },
+    "historyChunkSize": 20,
+    "renderer": {
+      "metadata": {
+      },
+      "resources": {
+      }
+    },
+    "socketUpdateThrottle": 1000,
+    "welcomeText": "<h4>Welcome to your own Screeps private server!</h4>This text can be changed by adding a mod to your server, see <code>mods.json</code> file in your server folder."
+  },
+  "useNativeAuth": false,
+  "users": 0
+}
+
+So it looks like there's a bit of lying going on, both the live and private servers report a "protocol" of 13 but there are differences in the response packets.
+
+I am going to assume that the absence of the "shards" array on "serverData" is good enough to assume that the server doesn't support shards. So if we issue this requests
+when the client starts we can decide to ignore shards going forward.
+
+---------------------------------------------------------------
+Authorisation HTTP headers
+---------------------------------------------------------------
+
+x-token: 543ea70ca0fcec02b737d35d65c6faf9fa08c20e
+x-username: 543ea70ca0fcec02b737d35d65c6faf9fa08c20e
+
+---------------------------------------------------------------
+Websocket Information
+---------------------------------------------------------------
+
+Type: GET
+Auth: No
+
+Request:
+
+https://screeps.com/socket/info
+
+Response:
+
+{
+  "cookie_needed": false,
+  "entropy": 3952539491,
+  "origins": [
+    "*:*"
+  ],
+  "websocket": true
+}
+
+---------------------------------------------------------------
+World Status
+---------------------------------------------------------------
+
+Type: GET
+Auth: No
+
+Request:
+
+https://screeps.com/api/user/world-status
+
+Response:
+
+{
+  "ok": 1,
+  "status": "empty"
+}
+
+---------------------------------------------------------------
+World Maps Stats
+---------------------------------------------------------------
+
+Type: POST
+Auth: Yes (x-token header)
+
+Desc: This one's a bit of a beast, I am not 100% clear on its use but it seems to be used to retrieve the world map.
+The web client makes serve requests to the "map-stats" and "respawn-prohibited-rooms" while scrolling through the world map.
+There's a list of rooms given in the POST data for the "map-stats" request but I am not sure of the pattern yet, does the client
+retrive the rooms in a certain order? X by Y sectors at a time? How does it  know what room to start with? Maybe the centre of the
+world?
+
+Observations:
+The centre of the world would be the quadrant
+
+		      |
+		W0N0  |  E0N0
+	 -------+-------
+		W0S0  |  E0S0
+		      |
+
+Then the rooms expand out in each direction (increasing room numbers)
+until the maximum number of rooms in the world is reached. Need to find out
+where to get the world room size. On the live server it seems to be 60 rooms
+in each direction (I guess this depend on shard)
+
+Request:
+
+https://screeps.com/api/game/map-stats
+
+Post Body:
+
+{"rooms":["E0N38","E1N38","E2N38","E3N38","E4N38","E5N38","E6N38","E7N38","E8N38","E9N38","E10N38","E11N38","E12N38","E13N38","E14N38","E0N37","E1N37","E2N37","E3N37","E4N37","E5N37","E6N37","E7N37","E8N37","E9N37","E10N37","E11N37","E12N37","E13N37","E14N37","E0N36","E1N36","E2N36","E3N36","E4N36","E5N36","E6N36","E7N36","E8N36","E9N36","E10N36","E11N36","E12N36","E13N36","E14N36","E0N35","E1N35","E2N35","E3N35","E4N35","E5N35","E6N35","E7N35","E8N35","E9N35","E10N35","E11N35","E12N35","E13N35","E14N35","E0N34","E1N34","E2N34","E3N34","E4N34","E5N34","E6N34","E7N34","E8N34","E9N34","E10N34","E11N34","E12N34","E13N34","E14N34","E0N33","E1N33","E2N33","E3N33","E4N33","E5N33","E6N33","E7N33","E8N33","E9N33","E10N33","E11N33","E12N33","E13N33","E14N33","E0N32","E1N32","E2N32","E3N32","E4N32","E5N32","E6N32","E7N32","E8N32","E9N32","E10N32","E11N32","E12N32","E13N32","E14N32","E0N31","E1N31","E2N31","E3N31","E4N31","E5N31","E6N31","E7N31","E8N31","E9N31","E10N31","E11N31","E12N31","E13N31","E14N31","E0N30","E1N30","E2N30","E3N30","E4N30","E5N30","E6N30","E7N30","E8N30","E9N30","E10N30","E11N30","E12N30","E13N30","E14N30"],"shard":"shard3","statName":"owner0"}
+
+Response:
+
+{
+  "ok": 1,
+  "gameTime": 2129245,
+  "stats": {
+    "E0N35": {
+      "status": "normal"
+    },
+    "E11N31": {
+      "status": "normal",
+      "novice": 1542109736824,
+      "own": {
+        "user": "594ddfbe66235f5268e9e0ab",
+        "level": 7
+      }
+    },
+  },
+  "users": {
+    "583cde7e445866cb4ad12fa1": {
+      "_id": "583cde7e445866cb4ad12fa1",
+      "username": "SandyVaJJ",
+      "badge": {
+        "type": 7,
+        "color1": "#000077",
+        "color2": "#5555dd",
+        "color3": "#e31c1c",
+        "param": -59,
+        "flip": false
+      }
+    },
+    "5898c61187332e2e6a333640": {
+      "_id": "5898c61187332e2e6a333640",
+      "username": "JohnnyB1988",
+      "badge": {
+        "type": 18,
+        "color1": "#8b0000",
+        "color2": "#007017",
+        "color3": "#a4ae00",
+        "param": 43,
+        "flip": false
+      }
+    }
+  }
+}
+
+
+Notes:
+Interesting bot found on live server :)
+
+"E1N3": {
+      "status": "normal",
+      "own": {
+        "user": "54c0000233bcf50a41045d05",
+        "level": 0
+      },
+      "sign": {
+        "user": "561e4d4645f3f7244a7622e8",
+        "text": "Fully Autonomous Open Source Bot * github.com/ScreepsQuorum/screeps-quorum * #quorum in Slack",
+        "time": 24890522,
+        "datetime": 1522912654937
+      }
+    },
+
+---------------------------------------------------------------
+Game Shard Info
+---------------------------------------------------------------
+
+Desc:
+Request information about the shard supported by the server
+
+Type: GET
+Auth: No
+
+Request:
+
+https://screeps.com/api/game/shards/info
+
+Response:
+
+{
+  "ok": 1,
+  "shards": [
+    {
+      "cpuLimit": 0,
+      "lastTicks": [
+        5350,
+        5339,
+        4875,
+        5572
+      ],
+      "name": "shard0",
+      "rooms": 17079,
+      "tick": "5199.9896313675945",
+      "users": 326
+    },
+    {
+      "cpuLimit": 0,
+      "lastTicks": [
+        3248,
+        3271,
+        3489,
+        3226
+      ],
+      "name": "shard1",
+      "rooms": 10512,
+      "tick": "3265.4183369618995",
+      "users": 242
+    },
+    {
+      "cpuLimit": 0,
+      "lastTicks": [
+        3552,
+        3006,
+        2971,
+        3411,
+        3375
+      ],
+      "name": "shard2",
+      "rooms": 10512,
+      "tick": "3185.1534852816335",
+      "users": 300
+    },
+    {
+      "cpuLimit": 20,
+      "lastTicks": [
+        2847,
+        2604,
+        2718,
+        2730,
+        2770
+      ],
+      "name": "shard3",
+      "rooms": 4562,
+      "tick": "2775.635240369492",
+      "users": 766
+    }
+  ]
+}
+
+Notes:
+This request returns HTTP404 on my test server because I assume shards are not supported by the private server.
+Would like to be able to determine early on if shards are supported and not rely on HTTP404 response.
+
+---------------------------------------------------------------
+Game Time
+---------------------------------------------------------------
+
+Type: GET
+Auth: No
+
+Request:
+https://screeps.com/api/game/time?shard=shard3
+
+Response:
+
+
+---------------------------------------------------------------
+Leader Boards
+---------------------------------------------------------------
+
+Desc:
+Request a list of leader boards. I assume there is an additional request available to
+get leader board details by ID.
+
+Type: GET
+Auth: No
+
+Request:
+
+https://screeps.com/api/leaderboard/seasons
+
+Response:
+
+{
+  "ok": 1,
+  "seasons": [
+    {
+      "_id": "2018-12",
+      "date": "2018-12-01T00:00:06.261Z",
+      "name": "December 2018"
+    },
+    {
+      "_id": "2018-11",
+      "date": "2018-11-01T00:00:08.335Z",
+      "name": "November 2018"
+    },
+    {
+      "_id": "2018-10",
+      "date": "2018-10-01T00:00:07.519Z",
+      "name": "October 2018"
+    },
+    {
+      "_id": "2018-09",
+      "date": "2018-09-01T00:00:06.426Z",
+      "name": "September 2018"
+    },
+    {
+      "_id": "2018-08",
+      "date": "2018-08-01T00:00:07.264Z",
+      "name": "August 2018"
+    },
+    {
+      "_id": "2018-07",
+      "date": "2018-07-01T00:00:07.667Z",
+      "name": "July 2018"
+    }
+  ]
+}
+
+---------------------------------------------------------------
+Leader board find
+---------------------------------------------------------------
+
+Type: GET
+Auth: No
+
+Request:
+
+https://screeps.com/api/leaderboard/find?mode=world&season=2018-12&username=Shecks
+
+Response:
+
+{
+  "error": "result not found"
+}
+
+TODO: Find a user on the leader board and add response
+
+---------------------------------------------------------------
+Authorised User Info
+---------------------------------------------------------------
+
+Desc:
+Request information about the current authorised user.
+
+Type: GET
+Auth: Yes (x-token header)
+
+Request:
+
+https://screeps.com/api/auth/me
+
+Response:
+
+{
+  "_id": "578d4702409f1ea416405d9d",
+  "badge": {
+    "color1": "#277700",
+    "color2": "#ffffff",
+    "color3": "#e87130",
+    "flip": false,
+    "param": 100,
+    "type": 5
+  },
+  "cpu": 20,
+  "cpuShard": {
+    "-Infinity": null
+  },
+  "cpuShardUpdatedTime": 0,
+  "credits": 0,
+  "gcl": 2294059,
+  "money": 0,
+  "notifyPrefs": {
+    "disabled": true
+  },
+  "ok": 1,
+  "password": false,
+  "promoPeriodUntil": 1471468546322,
+  "runtime": {
+    "legacyVm": true
+  },
+  "steam": {
+    "displayName": "Shecks",
+    "id": "76561198202242883",
+    "ownership": [
+      464350
+    ]
+  },
+  "subscriptionTokens": 0,
+  "username": "Shecks"
+}
+
+
+---------------------------------------------------------------
+User overview
+---------------------------------------------------------------
+
+Type: GET
+Auth: Yes (x-token header)
+
+Request:
+
+https://screeps.com/api/user/overview?interval=8&statName=energyHarvested
+
+Response:
+
+{
+  "ok": 1,
+  "shards": {
+    "shard0": {
+      "gametimes": [
+        29052060,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rooms": [
+      ],
+      "stats": {
+      }
+    },
+    "shard1": {
+      "gametimes": [
+        13675857,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rooms": [
+      ],
+      "stats": {
+      }
+    },
+    "shard2": {
+      "gametimes": [
+        11586897,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rooms": [
+      ],
+      "stats": {
+      }
+    },
+    "shard3": {
+      "gametimes": [
+        2130394,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "rooms": [
+      ],
+      "stats": {
+      }
+    }
+  },
+  "statsMax": 69930,
+  "totals": {
+  }
+}
+
+---------------------------------------------------------------
+Response Prohibited Rooms
+---------------------------------------------------------------
+
+Type: GET
+Auth: Yes (x-token header)
+
+Desc: I assume this request returns a list of all the rooms the user is not allowed to re-spawn in. It requires authorisation
+and returns information related to the authroised user only.
+
+Request:
+https://screeps.com/api/user/respawn-prohibited-rooms
+
+Response:
+{
+  "ok": 1,
+  "rooms": [
+  ]
+}
+
+---------------------------------------------------------------
+User Message Count
+---------------------------------------------------------------
+
+Type: GET
+Auth: Yes (x-token header)
+
+Request:
+
+https://screeps.com/api/user/messages/unread-count
+
+Response:
+{
+  "ok": 1,
+  "count": 0
+}
+
+---------------------------------------------------------------
+User Messages
+---------------------------------------------------------------
+
+Type: GET
+Auth: Yes (x-token header)
+
+Request:
+
+https://screeps.com/api/user/messages/index
+
+Response:
+
+{
+  "messages": [
+  ],
+  "ok": 1,
+  "users": {
+  }
+}
+
+---------------------------------------------------------------
+User Starting Rooms
+---------------------------------------------------------------
+
+Type: GET
+Auth: Yes
+
+Desc:
+I am not really sure yet what this is, is it a list of suggested rooms for the player to start in?
+Or a list of rooms suitable for starting player that are still available (in the safe zone)
+
+This test was done with a user with no claimed rooms so it's not a list of the users rooms
+
+Request:
+
+https://screeps.com/api/user/world-start-room?shard=shard3
+
+Response:
+
+{
+  "ok": 1,
+  "room": [
+    "W35S15",
+    "E15N45",
+    "E25N45"
+  ]
+}
+
+Notes: The live web client also makes a call to "world-start-room" without the shard query and the
+following is returned:
+
+{
+  "ok": 1,
+  "room": [
+    "shard3/W35S15",
+    "shard3/E25N45",
+    "shard3/E15N45"
+  ]
+}
+
+---------------------------------------------------------------
+Room Status
+---------------------------------------------------------------
+
+Desc:
+Request the status for a given room
+
+Type: GET
+Auth: Yes (x-token header)
+
+Request:
+https://screeps.com/api/game/room-status?room=E7N34&shard=shard3
+
+Response:
+{
+  "ok": 1,
+  "room": {
+    "_id": "E7N34",
+    "status": "normal",
+    "novice": 1542024634714
+  }
+}
+
+---------------------------------------------------------------
+Room Terrain
+---------------------------------------------------------------
+
+Type: GET
+Auth: No
+
+Desc:
+Request information about a rooms fixed terrain (e.g Walls, Swamps etc)
+
+Request:
+
+https://screeps.com/api/game/room-terrain?encoded=true&room=E7N34&shard=shard3
+
+Response:
+
+{
+  "ok": 1,
+  "terrain": [
+    {
+      "_id": "5bbcad509099fc012e6371a3",
+      "room": "E7N34",
+      "terrain": "1111111111111110000001110000011111111111111111111111111111111000000000000000000011111111111111001111111111111120000000000220000000011110220111222001111111111112200000000022220000000011002222222220011111111111110000000111222201102200000002222222001111111111111100022011111111111122200000022222220111111102211111000221111111111111122000002222010001111110022211100002111111111111111110000222201110001111100222222000022100001111111111110002220011110001111002222200002200000001111111111100211100011100011110222220002222000000011111111111101111000111000111102222200222220000000111111111111111110001100001111002222000222222200001111111111111111000110000011110002220000002222200001111111111111200011000001111100002220000000222000001111111111122200000000011111000022200000000220000001111111110022000000000111110000022200000000000000011111111000222000000011111110000022000000000000000111111110022222000000111111100000222000000000000011111111112222222000000111110000002220000000000000111111111102222200000000111000000211111120000000000111111111100000000000000110000001111111120000000000111111111100000000000001100000211111111100220000021111111111000000000000111000000211001110002200002111111111112200000000001110000000000000000011111021111111111022000000000011100000000000000001111111201111111110220000000000111000000000000022111111110001111111102200000000221110000000000222221111111200000011111022200000022211100002220002222221111122000000011110222000002221111000022200001222220000000000000011000222000022211110002220000111222220000000000000000000222000222211100222200001110222200000000000000222002222222220011002222000111122220000000111000002220002222222000010022200011110222000000011110000000000002222200000100000000010022220000001111100000000000002220000001000000000002222200000111100000000000000000010002010000000000222222200001110000000000002220001110020100000000002222220000011100000002222222200111110001000000000002200000000111000002222222222011111100010002000000000000000011100000222222222001111111000110222200000000000001111000022222222220011111100001110222220000000000011110002222222222200010220000011100222220000022000111000022222222222000022220000110002222200000220001110000222222222200002222000001100022222000000200011110002222200000000002220000011000222200000000000011110222222000000000000000000110000000000001000000111112201110000000000000000001100000000000111000011111111111111000000000000000011100000000011111111111111111111111111000011111001111111111111111111111111111111111111111111111111111",
+      "type": "terrain"
+    }
+  ]
+}
+
+Note: It doesn't seem to matter what the value of "encoded" is, the server just looks for its presence. When not present the "terrain" object is unpacked.
+The live server sets "encoded=true". There's not real reason for the client to request the de-coded terrain anyway it's more difficult to parse.
+
+---------------------------------------------------------------
+Ticks
+---------------------------------------------------------------
+
+Desc:
+Get the time tick for a give shard
+
+Type: GET
+Auth: No
+
+Request:
+https://screeps.com/api/game/shards/tick?shard=shard3
+
+Response:
+{
+  "ok": 1,
+  "tick": 2595
+}
+
+---------------------------------------------------------------
+Badges
+---------------------------------------------------------------
+https://screeps.com/api/user/badge-svg?username=JohnnyB1988
+
+World Status
+https://screeps.com/api/user/world-status
+
+{ok: 1, status: "empty"}
+ok: 1
+status: "empty"

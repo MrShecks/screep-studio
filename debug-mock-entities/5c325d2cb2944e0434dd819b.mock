@@ -1,0 +1,12 @@
+{
+    "_id": "5c42cd790bde62043d92b3b6",
+    "hits": 500,
+    "hitsMax": 500,
+    "notifyWhenAttacked": true,
+    "observeRoom": "W1S2",
+    "room": "W7N4",
+    "type": "observer",
+    "user": "5c30b42b3ca96b042cc6228c",
+    "x": 35,
+    "y": 17
+}

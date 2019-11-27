@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/images/ground-mask.png</file>
+        <file>assets/images/ground.png</file>
+        <file>assets/images/copy.svg</file>
+        <file>assets/images/chevrons-down.svg</file>
+        <file>assets/images/chevrons-up.svg</file>
+        <file>assets/images/zoom-out.svg</file>
+        <file>assets/images/zoom-in.svg</file>
+        <file>assets/images/trash-2.svg</file>
+        <file>assets/images/pause.svg</file>
+        <file>assets/images/grid.svg</file>
+        <file>assets/images/properties.svg</file>
+        <file>assets/images/world.svg</file>
+        <file>assets/images/object.svg</file>
+        <file>assets/images/console.svg</file>
+        <file>assets/images/play.svg</file>
+        <file>assets/images/wall_tileset.png</file>
+        <file>assets/images/plain_tileset.png</file>
+        <file>assets/images/basic_wall_tileset.png</file>
+        <file>assets/images/basic_wall_tileset_dark.png</file>
+        <file>assets/images/toolbox.svg</file>
+        <file>assets/images/invader.svg</file>
+        <file>assets/images/glow.png</file>
+    </qresource>
+</RCC>

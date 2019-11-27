@@ -1,0 +1,22 @@
+{
+    "GO": 24,
+    "KO": 15,
+    "L": 1000,
+    "UH": 20,
+    "Z": 101450,
+    "ZH": 10,
+    "_id": "5c34ae4f299a7f043e48ef84",
+    "cooldownTime": 1651714,
+    "energy": 80197,
+    "energyCapacity": 300000,
+    "hits": 3000,
+    "hitsMax": 3000,
+    "notifyWhenAttacked": true,
+    "room": "W7N4",
+    "send": null,
+    "type": "terminal",
+    "user": "5c30b42b3ca96b042cc6228c",
+    "x": 35,
+    "y": 17
+}
+
