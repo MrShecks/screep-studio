@@ -2,6 +2,8 @@
 
 A cross platform client for the Screeps MMO sandbox game for programmers
 
-![Screep Studio]("/screenshots/Screenshot from 2019-11-27 17-52-06.png" "Screen Shot 1")
+Example screenshot 1
+![Screep Studio](screenshots/screep-studio-001.png "Screen Shot 1")
 
-![Screep Studio]("/screenshots/Screenshot from 2019-01-27 20-19-22.png" "Screen Shot 2")
+Example screenshot 2
+![Screep Studio](screenshots/screep-studio-002.png "Screen Shot 2")
