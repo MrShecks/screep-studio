@@ -60,6 +60,8 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
 ### Video
 A short video showing the client running can be found [here](https://youtu.be/dZnie-9v39c)
 
+There's also a playlist showing the development of Screep Studio [here](https://www.youtube.com/playlist?list=PLxFqsJkRoZf8zN44B-1vD27toUQzQdZmc)
+
 ### Screenshot 1
 ![Screep Studio](screenshots/screep-studio-001.png)
 
