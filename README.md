@@ -3,11 +3,11 @@
 Screep Studio is a native cross platform client for the [Screeps](https://screeps.com/) MMO sandbox game for programmers.
 It is written using the Qt Cross Platform C++ framework so should compile and run on Microsoft Windows, Mac OS and Linux.
 
-The project was initially written as part of the Level1Techs "Devember 2018" event.
+The project was initially written as part of the Level1Techs ["Devember2k18"](https://forum.level1techs.com/t/devember-screep-studio/135653) coding event.
 
 Note: Screep Studio is currently in development (on an ad-hoc basis) so it is far from complete. While it can successfully
 connect to either a privately hosted server or the live Screeps server (probably not a great idea but the client is reasonably
-stable and shouldn't doing anything that might cause problems for the server) there is currently no UI for selecting a server,
+stable and shouldn't doing anything crazy that might cause problems for the server) there is currently no UI for selecting a server,
 logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioApplication.cpp](ScreepStudioApplication.cpp)
 
 ## Features:
@@ -36,9 +36,9 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
   and will fail to connect if a matching library is not found. For the moment I am working around the problem by adding a symbolic link to
   the build directory for libssl.so that points to a compatible library
 
-    libssl.so -> /usr/lib64/libssl.so.1.0.2o
+      libssl.so -> /usr/lib64/libssl.so.1.0.2o
 
-  Note: There is a bug logged against the Qt Framework for this issue (TODO: Reference bug)
+  Note: There is a bug logged against the Qt Framework for this issue (See [QTBUG-68156](https://bugreports.qt.io/browse/QTBUG-68156))
 
 - If you want to try to compile and run Screep Studio you will need to obtain an API key/authentication token based on the Screeps log in.
   Once you have your auth token you can either hard-code it in [ScreepStudioApplication.cpp](ScreepStudioApplication.cpp) or add it
@@ -48,6 +48,8 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
       authKey=<Your authentication token here>
 
   Information on obtaining an authorisation token can be found here https://docs.screeps.com/auth-tokens.html
+
+- There's a lot of DEBUG code and partially implemented features in the source.
 
 ## Unknown Issues:
 
