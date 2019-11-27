@@ -46,6 +46,8 @@ public:
     bool showGrid() const;
     void setShowGrid(bool show);
 
+    QString authKey() const;
+
     void saveWindowState(const QString& tag, const QMainWindow* window);
     void restoreWindowState(const QString& tag, QMainWindow* window);
 

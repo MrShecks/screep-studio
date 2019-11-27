@@ -36,7 +36,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #define CONNECT_LIVE_SERVER     1
-#define CONNECT_RIMMER_WORLD    0
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,34 +65,27 @@ ScreepStudioApplication::ScreepStudioApplication(int& argc, char** argv, int fla
     connect(_networkModel, &NetworkModel::roomEventReceived, this, &ScreepStudioApplication::_onRoomEventReceived);
 
 #if CONNECT_LIVE_SERVER
+    QString authKey = _prefs.authKey();
+    Q_ASSERT_X(!authKey.isEmpty(), "ScreepStudioApplication", "Screeps API Authentication Key not found in \"Screep Studio.conf\"");
+
     qDebug() << "QSslSocket Build Version=" << QSslSocket::sslLibraryBuildVersionString();
     qDebug() << "SSL version found=" << QSslSocket::sslLibraryVersionNumber() << ", Library Path=" << QCoreApplication::libraryPaths();
+    qDebug() << "Screeps API Auth Key=" << authKey;
 
-    _networkModel->setAuthentication ("ea034548-7886-4a9a-86e4-74ed0a4ed473");
+    _networkModel->setAuthentication (authKey);
     _networkModel->openConnection("screeps.com", -1, true);
 #else
+    // Note: This is not a real password :)
     _networkModel->setAuthentication ("Shecks", "mysecretpassword");
-#if CONNECT_RIMMER_WORLD
-    _networkModel->openConnection("192.168.1.13", 21025, false);
-#else
     _networkModel->openConnection("192.168.1.11", 21025, false);
-#endif // CONNECT_RIMMER_WORLD
 #endif // CONNECT_LIVE_SERVER
 
     _consoleModel->setModel(_networkModel);
 }
 
 ScreepStudioApplication::~ScreepStudioApplication() {
-
     _networkModel->closeConsole(_userInfoModel->id());
     delete _mainWindow;
-
-    // FIXME: Remove these, there's no need to explicitly delete QObjects if they are parented
-
-    delete _consoleModel;
-    delete _worldModel;
-    delete _userInfoModel;
-    delete _serverInfoModel;
 }
 
 const QString& ScreepStudioApplication::userId() const {
@@ -156,6 +148,11 @@ void ScreepStudioApplication::_onRoomEventReceived(const SocketEventRoom& event)
 #endif // QT_DEBUG
 }
 
+//
+// Note: The following _onConnectionStateChanged() handler is temporary and only
+// used to open some rooms for debugging until I complete the UI for room seleciton.
+//
+
 #include "models/world/WorldModel.h"
 
 void ScreepStudioApplication::_onConnectionStateChanged(NetworkModel::ConnectionState oldState, NetworkModel::ConnectionState newState) {
@@ -197,8 +194,6 @@ void ScreepStudioApplication::_onConnectionStateChanged(NetworkModel::Connection
 
 //        _mainWindow->openRoom("W7N1");
 #endif // CONNECT_LIVE_SERVER
-
-        // storage.db['rooms.objects'].update({ _id: '1bc30772347c388' },{ $set: { level: 8 }})
     }
 }
 

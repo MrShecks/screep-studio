@@ -44,6 +44,10 @@ bool Preferences::showGrid() const {
     return _settings.value("Settings/showGrid", false).toBool();
 }
 
+QString Preferences::authKey() const {
+    return _settings.value("Security/authKey").toString();
+}
+
 void Preferences::setShowGrid(bool show) {
     _settings.setValue("Settings/showGrid", show);
 }
