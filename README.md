@@ -3,6 +3,8 @@
 Screep Studio is a native cross platform client for the [Screeps](https://screeps.com/) MMO sandbox game for programmers.
 It is written using the Qt Cross Platform C++ framework so should compile and run on Microsoft Windows, Mac OS and Linux.
 
+The project was initially written as part of the Level1Techs "Devember 2018" event.
+
 Note: Screep Studio is currently in development (on an ad-hoc basis) so it is far from complete. While it can successfully
 connect to either a privately hosted server or the live Screeps server (probably not a great idea but the client is reasonably
 stable and shouldn't doing anything that might cause problems for the server) there is currently no UI for selecting a server,
@@ -34,7 +36,7 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
    and will fail to connect if a matching library is not found. For the moment I am working around the problem by adding a symbolic link to
    the build directory for libssl.so that points to a compatible library
 
-   e.g. libssl.so -> /usr/lib64/libssl.so.1.0.2o
+    libssl.so -> /usr/lib64/libssl.so.1.0.2o
 
    Note: There is a bug logged against the Qt Framework for this issue (TODO: Reference bug)
 
@@ -42,8 +44,8 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
    Once you have your auth token you can either hard-code it in [ScreepStudioApplication.cpp](ScreepStudioApplication.cpp) or add it
    to the Security section of the "Screep Studio.conf" file.
 
-   e.g [Security]
-       authKey=<Your authentication token here>
+    [Security]
+    authKey=<Your authentication token here>
 
    Information on obtaining an authorisation token can be found here https://docs.screeps.com/auth-tokens.html
 
