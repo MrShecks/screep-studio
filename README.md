@@ -17,9 +17,9 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
 
 - Basic rendering for the following game entities:-
 
-    Construction Sites, Containers, Controllers, Creeps, Energy Deposits, Extensions, Extractors, Labs, Links, Minerals,
-    Nukers, Observers, Power Spawns, Ramparts, Roads, Sources, Spawns, Storage, Terminals, Tombstones, Towers, Walls,
-    Unknown Entities (a placeholder shown when the entity is not supported)
+  Construction Sites, Containers, Controllers, Creeps, Energy Deposits, Extensions, Extractors, Labs, Links, Minerals,
+  Nukers, Observers, Power Spawns, Ramparts, Roads, Sources, Spawns, Storage, Terminals, Tombstones, Towers, Walls,
+  Unknown Entities (a placeholder shown when the entity is not supported)
 
 - A console window that can be used to execute commands and call Screeps APIs as well as displaying the output of logging APIs.
   Note: The console can be show/hidden using the Ctrl+C shortcut key or via the Window menu.
@@ -31,30 +31,35 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
 
 ## Know Issues:
 
- - At the time of writing the Qt Framework seems to have an issue when connecting to WebSockets over SSL. This seems to be a particular
-   issue on Linux. As far as I can tell, the current Qt libraries expect to find OpenSSL v1.0.2 installed (OpenSSL 1.0.2k-fips  26 Jan 2017)
-   and will fail to connect if a matching library is not found. For the moment I am working around the problem by adding a symbolic link to
-   the build directory for libssl.so that points to a compatible library
+- At the time of writing the Qt Framework seems to have an issue when connecting to WebSockets over SSL. This seems to be a particular
+  issue on Linux. As far as I can tell, the current Qt libraries expect to find OpenSSL v1.0.2 installed (OpenSSL 1.0.2k-fips  26 Jan 2017)
+  and will fail to connect if a matching library is not found. For the moment I am working around the problem by adding a symbolic link to
+  the build directory for libssl.so that points to a compatible library
 
-      libssl.so -> /usr/lib64/libssl.so.1.0.2o
+    libssl.so -> /usr/lib64/libssl.so.1.0.2o
 
-   Note: There is a bug logged against the Qt Framework for this issue (TODO: Reference bug)
+  Note: There is a bug logged against the Qt Framework for this issue (TODO: Reference bug)
 
- - If you want to try to compile and run Screep Studio you will need to obtain an API key/authentication token based on the Screeps log in.
-   Once you have your auth token you can either hard-code it in [ScreepStudioApplication.cpp](ScreepStudioApplication.cpp) or add it
-   to the Security section of the "Screep Studio.conf" file.
+- If you want to try to compile and run Screep Studio you will need to obtain an API key/authentication token based on the Screeps log in.
+  Once you have your auth token you can either hard-code it in [ScreepStudioApplication.cpp](ScreepStudioApplication.cpp) or add it
+  to the Security section of the "Screep Studio.conf" file.
 
       [Security]
       authKey=<Your authentication token here>
 
-   Information on obtaining an authorisation token can be found here https://docs.screeps.com/auth-tokens.html
+  Information on obtaining an authorisation token can be found here https://docs.screeps.com/auth-tokens.html
 
 ## Unknown Issues:
 
- - Lots ... Screep Studio is just something I work on for fun so there's lots more work required and most likely lots of issues to be resolved.
+- Lots ... Screep Studio is just something I work on for fun so there's lots more work required and most likely lots of issues to be resolved.
 
-## Screenshot 1
+## What it looks like...
+
+### Video
+A short video showing the client running can be found [here](https://youtu.be/dZnie-9v39c)
+
+### Screenshot 1
 ![Screep Studio](screenshots/screep-studio-001.png)
 
-## Screenshot 2
+### Screenshot 2
 ![Screep Studio](screenshots/screep-studio-002.png)
