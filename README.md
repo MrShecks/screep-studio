@@ -17,8 +17,8 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
 
 - Basic rendering for the following game entities:-
 
-  Construction Sites, Containers, Controllers, Creeps, Energy Deposits, Extensions, Extractors, Labs, Links, Minerals,
-  Nukers, Observers, Power Spawns, Ramparts, Roads, Sources, Spawns, Storage, Terminals, Tombstones, Towers, Walls,
+  Construction Sites, Containers, Controllers, Creeps, Invaders, Energy Deposits, Extensions, Extractors, Labs, Links,
+  Minerals, Nukers, Observers, Power Spawns, Ramparts, Roads, Sources, Spawns, Storage, Terminals, Tombstones, Towers, Walls,
   Unknown Entities (a placeholder shown when the entity is not supported)
 
 - A console window that can be used to execute commands and call Screeps APIs as well as displaying the output of logging APIs.
@@ -31,14 +31,9 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
 
 ## Know Issues:
 
-- At the time of writing the Qt Framework seems to have an issue when connecting to WebSockets over SSL. This seems to be a particular
-  issue on Linux. As far as I can tell, the current Qt libraries expect to find OpenSSL v1.0.2 installed (OpenSSL 1.0.2k-fips  26 Jan 2017)
-  and will fail to connect if a matching library is not found. For the moment I am working around the problem by adding a symbolic link to
-  the build directory for libssl.so that points to a compatible library
-
-      libssl.so -> /usr/lib64/libssl.so.1.0.2o
-
-  Note: There is a bug logged against the Qt Framework for this issue (See [QTBUG-68156](https://bugreports.qt.io/browse/QTBUG-68156))
+- Due to a bug in how the Qt Framework resolves the OpenSSL libraries the client will fail to connect to
+  a secure web socket endpoint using Qt Framework versions prior to 5.12.1 (See [QTBUG-68156](https://bugreports.qt.io/browse/QTBUG-68156))
+  If you experience this issue please make sure you are building the client against a later version of Qt.
 
 - If you want to try to compile and run Screep Studio you will need to obtain an API key/authentication token based on the Screeps log in.
   Once you have your auth token you can either hard-code it in [ScreepStudioApplication.cpp](ScreepStudioApplication.cpp) or add it
