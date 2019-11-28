@@ -57,6 +57,7 @@ ScreepStudioApplication::ScreepStudioApplication(int& argc, char** argv, int fla
       _mainWindow(new MainWindow()) {
 
     setApplicationName(APPLICATION_NAME);
+    setOrganizationName(COMPANY_NAME);
 
     connect(_networkModel, &NetworkModel::connectionStateChanged, this, &ScreepStudioApplication::_onConnectionStateChanged);
     connect(_networkModel, &NetworkModel::serverInfoReceived, _serverInfoModel, &ServerInfoModel::refresh);

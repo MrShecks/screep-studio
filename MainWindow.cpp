@@ -22,6 +22,7 @@
 */
 
 #include <QDockWidget>
+#include <QMessageBox>
 #include <QtDebug>
 
 #include "MainWindow.h"
@@ -43,12 +44,6 @@ MainWindow::MainWindow(QWidget* parent /* = nullptr */)
       _ui(new Ui::MainWindow) {
 
     _ui->setupUi(this);
-
-//    setCorner(Qt::TopLeftCorner, Qt::LeftDockWidgetArea);
-//    setCorner(Qt::TopRightCorner, Qt::RightDockWidgetArea);
-//    setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
-//    setCorner(Qt::BottomRightCorner, Qt::RightDockWidgetArea);
-
     _ui->consoleWidget->setModel(application()->consoleModel());
 
     addDockWidgetMenuItem(_ui->menuWindow, _ui->toolBoxDockWidget, QKeySequence(Qt::CTRL + Qt::Key_T), ":/assets/images/toolbox.svg");
@@ -57,6 +52,13 @@ MainWindow::MainWindow(QWidget* parent /* = nullptr */)
     addDockWidgetMenuItem(_ui->menuWindow, _ui->inspectorDockWidget, QKeySequence(Qt::CTRL + Qt::Key_I), ":/assets/images/object.svg");
     addDockWidgetMenuItem(_ui->menuWindow, _ui->consoleDockWidget, QKeySequence(Qt::CTRL + Qt::Key_C), ":/assets/images/console.svg");
 
+    connect(_ui->actionOpen, &QAction::triggered, this, &MainWindow::unimplementedAction);
+    connect(_ui->actionZoomIn, &QAction::triggered, this, &MainWindow::unimplementedAction);
+    connect(_ui->actionZoomOut, &QAction::triggered, this, &MainWindow::unimplementedAction);
+
+    connect(_ui->actionAbout, &QAction::triggered, this, &MainWindow::showAboutMessage);
+    connect(_ui->actionExit, &QAction::triggered, this, &MainWindow::close);
+
     Preferences& prefs = application()->prefs();
 
     prefs.restoreWindowState("MainWindow", this);
@@ -64,9 +66,10 @@ MainWindow::MainWindow(QWidget* parent /* = nullptr */)
 }
 
 MainWindow::~MainWindow() {
-
     delete _ui;
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void MainWindow::openRoom(const QString& roomName, const QString& shardName /* = QString() */) {
     RoomModel::TSharedPtr roomModel;
@@ -90,25 +93,47 @@ void MainWindow::openRoom(const QString& roomName, const QString& shardName /* =
     }
 }
 
+void MainWindow::unimplementedAction() {
+    QMessageBox::information (this, tr("Unimplemented Function"), tr("FIXME: This functionality has not been implemented."));
+}
+
+void MainWindow::showAboutMessage() {
+    QMessageBox::about(this,tr("About"),
+        QString(tr("%1\n%2 (shecks@gmail.com)\n\nNote: This application is in development and not feature complete."))
+                       .arg(application()->applicationName())
+                       .arg(application()->organizationName()));
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void MainWindow::closeEvent(QCloseEvent* event) {
+    int result = QMessageBox::question (this, tr("Exit Application"), tr("Are you sure you want to exit the application?"), QMessageBox::Yes|QMessageBox::No);
 
-    for(int index = 0; index < _ui->tabWidget->count(); ++index) {
-        QWidget* child = _ui->tabWidget->widget(index);
-        QLayoutItem* layoutItem = child->layout()->takeAt(0);
-        RoomGraphicsView* roomGraphicsView = static_cast<RoomGraphicsView *>(layoutItem->widget ());
-        Q_ASSERT(roomGraphicsView != nullptr);
+    switch(result) {
+        case QMessageBox::Yes: {
+            for(int index = 0; index < _ui->tabWidget->count(); ++index) {
+                QWidget* child = _ui->tabWidget->widget(index);
+                QLayoutItem* layoutItem = child->layout()->takeAt(0);
+                RoomGraphicsView* roomGraphicsView = static_cast<RoomGraphicsView *>(layoutItem->widget ());
+                Q_ASSERT(roomGraphicsView != nullptr);
 
-        roomGraphicsView->close();
+                roomGraphicsView->close();
+            }
+
+            Preferences& prefs = application()->prefs();
+
+            prefs.setShowGrid(_ui->actionShowGrid->isChecked());
+            prefs.saveWindowState("MainWindow", this);
+
+            event->accept();
+        }
+        break;
+
+        default: {
+            event->ignore();
+        }
+        break;
     }
-
-    Preferences& prefs = application()->prefs();
-
-    prefs.setShowGrid(_ui->actionShowGrid->isChecked());
-    prefs.saveWindowState("MainWindow", this);
-
-    QMainWindow::closeEvent(event);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,3 +149,4 @@ void MainWindow::addDockWidgetMenuItem(QMenu* menu, const QDockWidget* dockWidge
     action->setIcon(QIcon(icon));
     menu->addAction(action);
 }
+

@@ -56,6 +56,9 @@ public:
 public slots:
     void openRoom(const QString& roomName, const QString& shardName = QString());
 
+    void unimplementedAction();
+    void showAboutMessage();
+
 private:
     Ui::MainWindow* _ui;
 
