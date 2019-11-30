@@ -35,6 +35,12 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
   a secure web socket endpoint using Qt Framework versions prior to 5.12.1 (See [QTBUG-68156](https://bugreports.qt.io/browse/QTBUG-68156))
   If you experience this issue please make sure you are building the client against a later version of Qt.
 
+- Screep Studio supports opening multiple rooms at the same time but the Screeps server currently limits the number of room subscriptions
+  to 2. If you are using your own private server you can increase the subscription limit by modifying the "USER_LIMIT" constant in the
+  room.js server source module which can be found in the following location on your server:-
+
+      <install_path>/node_modules/@screeps/backend/lib/game/socket/room.js
+
 - If you want to try to compile and run Screep Studio you will need to obtain an API key/authentication token based on the Screeps log in.
   Once you have your auth token you can either hard-code it in [ScreepStudioApplication.cpp](ScreepStudioApplication.cpp) or add it
   to the Security section of the "Screep Studio.conf" file.

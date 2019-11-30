@@ -22,9 +22,6 @@
 */
 
 #include <QBrush>
-#include <QHash>
-
-#include <QTextDocument>
 
 #include "ConsoleModel.h"
 #include "../NetworkModel.h"
@@ -192,20 +189,27 @@ void ConsoleModel::_onConsoleEventReceived(const SocketEventConsole& event) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void ConsoleModel::addItems(const TItemList& items) {
-    int count = _items.size();
 
-    if(count > MAX_CONSOLE_ITEMS - items.length()) {
-        beginRemoveRows (QModelIndex(), 0, items.length ());
+    //
+    // TODO: Look into basing the model on QContiguousCache instead
+    // of QList. A cache container would be more efficient but
+    // QContiguousCache indices are not stable so some additional
+    // work is required to map them to model indices
+    //
 
-        _items.erase (_items.begin(), _items.begin() + items.length() + 1);
-        count -= items.length();
+    int count = _items.count();
 
+    beginInsertRows(QModelIndex(), count, count + items.count());
+    _items.append(items);
+    endInsertRows();
+
+    if(_items.count() > MAX_CONSOLE_ITEMS) {
+        int numRowsToRemove = _items.count() - MAX_CONSOLE_ITEMS;
+
+        beginRemoveRows(QModelIndex(), 0, numRowsToRemove);
+        _items.erase(_items.begin(), _items.begin() + numRowsToRemove);
         endRemoveRows();
     }
-
-    beginInsertRows (QModelIndex(), count, count + items.size());
-    _items.append (items);
-    endInsertRows();
 }
 
 QString ConsoleModel::decodeString(const QString& encoded) const {
