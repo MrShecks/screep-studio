@@ -35,7 +35,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define CONNECT_LIVE_SERVER     1
+#define CONNECT_LIVE_SERVER     0
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -76,9 +76,12 @@ ScreepStudioApplication::ScreepStudioApplication(int& argc, char** argv, int fla
     _networkModel->setAuthentication (authKey);
     _networkModel->openConnection("screeps.com", -1, true);
 #else
-    // Note: This is not a real password :)
+    //
+    // Note: This is not a real password, well it is but it's for my private server :)
+    //
+
     _networkModel->setAuthentication ("Shecks", "mysecretpassword");
-    _networkModel->openConnection("192.168.1.11", 21025, false);
+    _networkModel->openConnection("192.168.1.13", 21025, false);
 #endif // CONNECT_LIVE_SERVER
 
     _consoleModel->setModel(_networkModel);
@@ -169,10 +172,8 @@ void ScreepStudioApplication::_onConnectionStateChanged(NetworkModel::Connection
 
 #if CONNECT_LIVE_SERVER
         _mainWindow->openRoom("W19S47", "shard2");
-//        _mainWindow->openRoom("W31S32", "shard2");
-
-//        _mainWindow->openRoom("E32N24", "shard3");
-//        _mainWindow->openRoom("W21N18", "shard1");
+        //_mainWindow->openRoom("W6S1", "shard2");
+        _mainWindow->openRoom("W47S56", "shard0");
 #else
 
         _mainWindow->openRoom("W8N3");
@@ -183,17 +184,6 @@ void ScreepStudioApplication::_onConnectionStateChanged(NetworkModel::Connection
         _mainWindow->openRoom("W9N5");               // Too-Angel Bot
         _mainWindow->openRoom("W9N2");               // Too-Angel Bot
         _mainWindow->openRoom("W8N7");               // Too-Angel Bot
-
-        //_mainWindow->openRoom("W15N12");
-
-
-//        _mainWindow->openRoom("W5N4");              // Has Invaders, Source Extractor and Source Keeper
-//        _mainWindow->openRoom("W1N9");
-//        _mainWindow->openRoom("W9N1");
-//        _mainWindow->openRoom("W9N9");
-
-
-//        _mainWindow->openRoom("W7N1");
 #endif // CONNECT_LIVE_SERVER
     }
 }
