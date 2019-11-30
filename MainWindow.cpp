@@ -28,6 +28,8 @@
 #include "MainWindow.h"
 #include "ScreepStudioApplication.h"
 
+#include "./ui/dialogs/ConnectDialog.h"
+
 #include "./widgets/PropertiesWidget.h"
 #include "./widgets/InvasionWidget.h"
 #include "./widgets/ConsoleWidget.h"
@@ -52,11 +54,12 @@ MainWindow::MainWindow(QWidget* parent /* = nullptr */)
     addDockWidgetMenuItem(_ui->menuWindow, _ui->inspectorDockWidget, QKeySequence(Qt::CTRL + Qt::Key_I), ":/assets/images/object.svg");
     addDockWidgetMenuItem(_ui->menuWindow, _ui->consoleDockWidget, QKeySequence(Qt::CTRL + Qt::Key_C), ":/assets/images/console.svg");
 
-    connect(_ui->actionOpen, &QAction::triggered, this, &MainWindow::unimplementedAction);
-    connect(_ui->actionZoomIn, &QAction::triggered, this, &MainWindow::unimplementedAction);
-    connect(_ui->actionZoomOut, &QAction::triggered, this, &MainWindow::unimplementedAction);
+    connect(_ui->actionConnect, &QAction::triggered, this, &MainWindow::actionConnect);
+    connect(_ui->actionOpen, &QAction::triggered, this, &MainWindow::actionUnimplemented);
+    connect(_ui->actionZoomIn, &QAction::triggered, this, &MainWindow::actionUnimplemented);
+    connect(_ui->actionZoomOut, &QAction::triggered, this, &MainWindow::actionUnimplemented);
 
-    connect(_ui->actionAbout, &QAction::triggered, this, &MainWindow::showAboutMessage);
+    connect(_ui->actionAbout, &QAction::triggered, this, &MainWindow::actionAbout);
     connect(_ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
     Preferences& prefs = application()->prefs();
@@ -93,15 +96,22 @@ void MainWindow::openRoom(const QString& roomName, const QString& shardName /* =
     }
 }
 
-void MainWindow::unimplementedAction() {
-    QMessageBox::information (this, tr("Unimplemented Function"), tr("FIXME: This functionality has not been implemented."));
+void MainWindow::actionConnect() {
+    ConnectDialog connectDialog(this);
+    int result = connectDialog.exec();
+
+    qDebug() << "MainWindow::actionConnect(): Result=" << result;
 }
 
-void MainWindow::showAboutMessage() {
+void MainWindow::actionAbout() {
     QMessageBox::about(this,tr("About"),
         QString(tr("%1\n%2 (shecks@gmail.com)\n\nNote: This application is in development and not feature complete."))
                        .arg(application()->applicationName())
                        .arg(application()->organizationName()));
+}
+
+void MainWindow::actionUnimplemented() {
+    QMessageBox::information (this, tr("Unimplemented Function"), tr("FIXME: This functionality has not been implemented."));
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -49,6 +49,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionConnect"/>
     <addaction name="actionOpen"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -216,6 +217,18 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionConnect">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/assets/images/server.svg</normaloff>:/assets/images/server.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Connect</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

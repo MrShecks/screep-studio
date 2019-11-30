@@ -21,14 +21,32 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef CONNECTDIALOG_H
-#define CONNECTDIALOG_H
+#ifndef _CONNECTDIALOG_H
+#define _CONNECTDIALOG_H
 
+#include <QDialog>
 
-class ConnectDialog : public QDialog
-{
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace Ui {
+    class ConnectDialog;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ConnectDialog
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class ConnectDialog : public QDialog {
+    typedef QDialog _super;
+
+    Q_OBJECT
+
 public:
-    ConnectDialog();
+    ConnectDialog(QWidget* parent = nullptr);
+    virtual ~ConnectDialog();
+
+private:
+    Ui::ConnectDialog* _ui;
 };
 
-#endif // CONNECTDIALOG_H
+#endif // _CONNECTDIALOG_H

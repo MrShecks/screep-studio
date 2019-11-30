@@ -22,8 +22,20 @@
 */
 
 #include "ConnectDialog.h"
+#include "ui_ConnectDialog.h"
 
-ConnectDialog::ConnectDialog()
-{
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ConnectDialog
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+ConnectDialog::ConnectDialog(QWidget* parent /* = nullptr */)
+    : _super(parent), _ui(new Ui::ConnectDialog) {
+
+    _ui->setupUi(this);
+    connect(_ui->connectButton, &QPushButton::clicked, this, &ConnectDialog::accept);
+    connect(_ui->cancelButton, &QPushButton::clicked, this, &ConnectDialog::reject);
+}
+
+ConnectDialog::~ConnectDialog() {
+    delete _ui;
 }

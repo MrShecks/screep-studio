@@ -22,5 +22,6 @@
         <file>assets/images/toolbox.svg</file>
         <file>assets/images/invader.svg</file>
         <file>assets/images/glow.png</file>
+        <file>assets/images/server.svg</file>
     </qresource>
 </RCC>

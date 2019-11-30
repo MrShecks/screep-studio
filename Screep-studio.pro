@@ -31,6 +31,7 @@ SOURCES += \
     models/room/RoomTerrainModel.cpp \
     ScreepStudioApplication.cpp \
     models/room/StorageRoomEntity.cpp \
+    ui/dialogs/ConnectDialog.cpp \
     utils/JSONUtils.cpp \
     network/rest/RESTRoomOverview.cpp \
     network/rest/Badge.cpp \
@@ -132,6 +133,7 @@ HEADERS += \
     models/room/RoomTerrainModel.h \
     ScreepStudioApplication.h \
     models/room/StorageRoomEntity.h \
+    ui/dialogs/ConnectDialog.h \
     utils/JSONUtils.h \
     network/rest/RESTRoomOverview.h \
     network/rest/Badge.h \
@@ -229,6 +231,7 @@ HEADERS += \
 
 FORMS += \
         MainWindow.ui \
+    ui/dialogs/ConnectDialog.ui \
 	widgets/PropertiesWidget.ui \
     	widgets/ConsoleWidget.ui \
     widgets/InspectorWidget.ui \
