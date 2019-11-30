@@ -189,6 +189,7 @@ void ConsoleModel::_onConsoleEventReceived(const SocketEventConsole& event) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void ConsoleModel::addItems(const TItemList& items) {
+    Q_ASSERT_X(!items.isEmpty(), "ConsoleModel::addItems", "addItems() called with empty array");
 
     //
     // TODO: Look into basing the model on QContiguousCache instead
@@ -197,18 +198,24 @@ void ConsoleModel::addItems(const TItemList& items) {
     // work is required to map them to model indices
     //
 
-    int count = _items.count();
+    //
+    // FIXME: The server shouldn't be sending an empty list, but just in case...
+    //
 
-    beginInsertRows(QModelIndex(), count, count + items.count());
-    _items.append(items);
-    endInsertRows();
+    if(!items.isEmpty()) {
+        int count = _items.count();
 
-    if(_items.count() > MAX_CONSOLE_ITEMS) {
-        int numRowsToRemove = _items.count() - MAX_CONSOLE_ITEMS;
+        beginInsertRows(QModelIndex(), count, count + items.count() - 1);
+        _items.append(items);
+        endInsertRows();
 
-        beginRemoveRows(QModelIndex(), 0, numRowsToRemove);
-        _items.erase(_items.begin(), _items.begin() + numRowsToRemove);
-        endRemoveRows();
+        if(_items.count() > MAX_CONSOLE_ITEMS) {
+            int numRowsToRemove = _items.count() - MAX_CONSOLE_ITEMS;
+
+            beginRemoveRows(QModelIndex(), 0, numRowsToRemove - 1);
+            _items.erase(_items.begin(), _items.begin() + numRowsToRemove);
+            endRemoveRows();
+        }
     }
 }
 
