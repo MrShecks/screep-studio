@@ -107,7 +107,11 @@ void MainWindow::showAboutMessage() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void MainWindow::closeEvent(QCloseEvent* event) {
+#ifndef QT_DEBUG
     int result = QMessageBox::question (this, tr("Exit Application"), tr("Are you sure you want to exit the application?"), QMessageBox::Yes|QMessageBox::No);
+#else
+    int result = QMessageBox::Yes;
+#endif // QT_DEBUG
 
     switch(result) {
         case QMessageBox::Yes: {

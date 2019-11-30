@@ -43,6 +43,7 @@ const QString Screeps::PATH_AUTH_STEAM_TOKEN            = QStringLiteral("/api/a
 const QString Screeps::PATH_AUTH_ME                     = QStringLiteral("/api/auth/me");
 
 const QString Screeps::PATH_AUTHMOD                     = QStringLiteral("/api/authmod");
+const QString Screeps::PATH_REGISTER_USER               = QStringLiteral("/api/register/submit");
 
 const QString Screeps::PATH_GAME_TIME                   = QStringLiteral("/api/game/time");
 const QString Screeps::PATH_GAME_WORLDSIZE              = QStringLiteral("/api/game/world-size");
@@ -58,8 +59,9 @@ const QString Screeps::QUERY_SHARD_NAME                 = QStringLiteral("shard"
 const QString Screeps::QUERY_ENCODED                    = QStringLiteral("encoded");
 const QString Screeps::QUERY_INTERVAL                   = QStringLiteral("interval");
 
-const QString Screeps::POST_EMAIL                       = QStringLiteral("email");
+const QString Screeps::POST_USERNAME                    = QStringLiteral("username");
 const QString Screeps::POST_PASSWORD                    = QStringLiteral("password");
+const QString Screeps::POST_EMAIL                       = QStringLiteral("email");
 
 const QString Screeps::POST_AUTH_TICKET                 = QStringLiteral("ticket");
 const QString Screeps::POST_AUTH_NATIVE                 = QStringLiteral("useNativeAuth");

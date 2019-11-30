@@ -51,6 +51,7 @@ public:
     static const QString PATH_AUTH_ME;
 
     static const QString PATH_AUTHMOD;
+    static const QString PATH_REGISTER_USER;
 
     static const QString PATH_GAME_TIME;
     static const QString PATH_GAME_WORLDSIZE;
@@ -67,6 +68,7 @@ public:
     static const QString QUERY_INTERVAL;
 
     static const QString POST_EMAIL;
+    static const QString POST_USERNAME;
     static const QString POST_PASSWORD;
 
     static const QString POST_AUTH_TICKET;

@@ -109,6 +109,8 @@ public:
     void setAuthentication(const QString& authToken);
     void setAuthentication(const QString& userName, const QString& password);
 
+    bool registerUser(const QString& userName, const QString& password, const QString& email = "");
+
     bool openConnection(const QString& host, int port = -1, bool isSecure = false);
     void closeConnection();
 

@@ -182,7 +182,12 @@ void ConsoleModel::_onConsoleEventReceived(const SocketEventConsole& event) {
         if(!event.errorMessage().isEmpty())
             items.append(Item(Item::ErrorMessage, event.errorMessage()));
 
-        addItems(items);
+        // For some reason the server can send empty events on the console stream
+        // I am not sure why or if they have a purpose yet (tick event?) so I will
+        // just ignore them here instead of in the network layer.
+
+        if(!items.isEmpty())
+            addItems(items);
     }
 }
 
@@ -198,24 +203,18 @@ void ConsoleModel::addItems(const TItemList& items) {
     // work is required to map them to model indices
     //
 
-    //
-    // FIXME: The server shouldn't be sending an empty list, but just in case...
-    //
+    int count = _items.count();
 
-    if(!items.isEmpty()) {
-        int count = _items.count();
+    beginInsertRows(QModelIndex(), count, count + items.count() - 1);
+    _items.append(items);
+    endInsertRows();
 
-        beginInsertRows(QModelIndex(), count, count + items.count() - 1);
-        _items.append(items);
-        endInsertRows();
+    if(_items.count() > MAX_CONSOLE_ITEMS) {
+        int numRowsToRemove = _items.count() - MAX_CONSOLE_ITEMS;
 
-        if(_items.count() > MAX_CONSOLE_ITEMS) {
-            int numRowsToRemove = _items.count() - MAX_CONSOLE_ITEMS;
-
-            beginRemoveRows(QModelIndex(), 0, numRowsToRemove - 1);
-            _items.erase(_items.begin(), _items.begin() + numRowsToRemove);
-            endRemoveRows();
-        }
+        beginRemoveRows(QModelIndex(), 0, numRowsToRemove - 1);
+        _items.erase(_items.begin(), _items.begin() + numRowsToRemove);
+        endRemoveRows();
     }
 }
 

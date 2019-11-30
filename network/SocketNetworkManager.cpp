@@ -238,8 +238,8 @@ void SocketNetworkManager::onTextMessageReceived(const QString& message) {
     QRegularExpressionMatch match;
 
     // ^\["(?<channel>\w+):(?<stream>[\w\/]+)",(?<json>{.+})\]$"
-#if _DEB_SHOW_SERVER_RESPONSE
-    qDebug().noquote () << "Message=" << message;
+#if _DBG_SHOW_SERVER_RESPONSE
+    qInfo().noquote() << "[SOCKET]:" << message;
 #endif // _DEB_SHOW_SERVER_RESPONSE
 
     if((match = REGEX_STREAM_RESPONSE.match(message)).hasMatch()) {
@@ -253,10 +253,10 @@ void SocketNetworkManager::onTextMessageReceived(const QString& message) {
 
     } else if((match = REGEX_STREAM_ERROR.match(message)).hasMatch()) {
 #ifdef QT_DEBUG
-        qDebug() << "Stream Error: "
-                 << "Channel=" << match.captured("channel")
-                 << ", Stream=" << match.captured("stream")
-                 << ", Error=" << match.captured ("error");
+        qCritical() << "[STREAM PARSE ERROR]"
+                    << " Channel=" << match.captured("channel")
+                    << ", Stream=" << match.captured("stream")
+                    << ", Error=" << match.captured ("error");
 #endif // QT_DEBUG
 
         emit errorReceived(SocketResponseError(match.captured("channel"), match.captured("stream"), match.captured ("error")));
@@ -269,9 +269,7 @@ void SocketNetworkManager::onTextMessageReceived(const QString& message) {
     }
 #ifdef QT_DEBUG
     else {
-
-        qDebug() << "Unrecognised socket response format!";
-        qDebug() << "*** Msg=" << message;
+        qCritical() << "[STREAM PARSE ERROR] Unrecognised socket response format: " << message;
     }
 #endif // QT_DEBUG
 

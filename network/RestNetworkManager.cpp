@@ -172,13 +172,21 @@ QString RestNetworkManager::getRequestHeader(const QString& key, const QString& 
 }
 
 void RestNetworkManager::getRequest(const RESTRequestBuilder& requestBuilder) {
-    _network.get(createRequest(requestBuilder.build(_baseRestUrl)));
+    QNetworkRequest request = createRequest(requestBuilder.build(_baseRestUrl));
+
+#if _DBG_SHOW_REST_REQUESTS
+    qInfo() << "[REST GET]" << request.url().toString();
+#endif // _DBG_SHOW_REST_REQUESTS
+
+    _network.get(request);
 }
 
 void RestNetworkManager::postRequest(const RESTRequestBuilder& requestBuilder) {
     QNetworkRequest request = createRequest(requestBuilder.build(_baseRestUrl), true);
 
-    qDebug() << "Body:" << requestBuilder.body ();
+#if _DBG_SHOW_REST_REQUESTS
+    qInfo() << "[REST POST]" << requestBuilder.body ();
+#endif // _DBG_SHOW_REST_REQUESTS
 
     _network.post(request, requestBuilder.body());
 }
@@ -216,13 +224,19 @@ void RestNetworkManager::ping() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void RestNetworkManager::onRequestFinished(QNetworkReply* reply) {
-    qDebug() << "Request=" << reply->request().url().toString();
+#if _DBG_SHOW_REST_RESOINSE
+    qInfo() << "[REST RESPONSE]" << reply->error() << ", " << reply->request().url().toString();
+#endif // _DBG_SHOW_REST_RESOINSE
 
     if(reply->error() == QNetworkReply::NoError) {
         emit restResponseReceived(RestResponse(reply));
     } else {
+
+        //
         // FIXME: Need to propagate HTTP errors
-        qDebug() << "********************************************************************************\n"
+        //
+
+        qCritical() << "********************************************************************************\n"
                  << "*** HTTP ERROR\n"
                  << "*** Request=" << reply->request().url() << "\n"
                  << "*** Error=" << reply->error() << "-" << reply->errorString() << "\n"

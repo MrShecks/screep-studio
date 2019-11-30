@@ -79,6 +79,18 @@ void NetworkModel::setAuthentication(const QString& userName, const QString& pas
     _authenticationType = AuthenticationType_Password;
 }
 
+bool NetworkModel::registerUser(const QString& userName, const QString& password, const QString& email /* = "" */) {
+    Q_ASSERT(_connectionState == StateConnected);
+    bool result = false;
+
+    if(_connectionState == StateConnected) {
+        _restNetworkManager.postRequest(RestPostRegisterUser(userName, password, email));
+        result = true;
+    }
+
+    return result;
+}
+
 bool NetworkModel::openConnection(const QString& host, int port /* = -1 */, bool isSecure /* = false */) {
     bool result = false;
 
@@ -160,6 +172,7 @@ bool NetworkModel::sendConsoleCommand(const QString& expression, const QString& 
 
     if(_connectionState == StateConnected) {
         _restNetworkManager.postRequest(RestPostConsoleCommand(expression, shardName));
+        result = true;
     }
 
     return result;

@@ -28,6 +28,19 @@
 #include "../RestNetworkManager.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// RestPostRegisterUser (HTTP POST)
+// Register a new user account (Private Server)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class RestPostRegisterUser : public RESTRequestBuilder {
+    typedef RESTRequestBuilder _super;
+
+public:
+    RestPostRegisterUser(const QString& userName, const QString& password, const QString& email = "");
+    virtual ~RestPostRegisterUser();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RestRequestUserSignin (HTTP POST)
 // Authenticate the user using username and password. Note: This method has been deprecated on the live server
 // and is only available on private servers with the "screepsmod-auth" mod installed and the user password has
