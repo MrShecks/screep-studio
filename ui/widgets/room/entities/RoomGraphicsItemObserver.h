@@ -27,7 +27,7 @@
 #include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/ObserverRenderer.h"
+#include "ui/widgets/room/renderers/ObserverRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ObserverEntity

@@ -24,7 +24,7 @@
 #ifndef _SOCKETCOMMANDSUBSCRIBE_H
 #define _SOCKETCOMMANDSUBSCRIBE_H
 
-#include "../SocketNetworkManager.h"
+#include "network/SocketNetworkManager.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SocketCommandSubscribe

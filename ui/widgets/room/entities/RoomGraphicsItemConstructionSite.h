@@ -27,7 +27,7 @@
 #include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/ConstructionSiteRenderer.h"
+#include "ui/widgets/room/renderers/ConstructionSiteRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ConstructionSiteEntity

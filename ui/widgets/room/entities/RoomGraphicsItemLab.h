@@ -25,7 +25,7 @@
 #define _ROOMGRAPHICSITEMLAB_H
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/LabRenderer.h"
+#include "ui/widgets/room/renderers/LabRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LabEntity

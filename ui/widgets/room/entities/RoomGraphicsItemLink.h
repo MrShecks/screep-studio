@@ -26,7 +26,7 @@
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "../renderers/LinkRenderer.h"
+#include "ui/widgets/room/renderers/LinkRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LinkEntity

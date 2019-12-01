@@ -24,7 +24,7 @@
 #ifndef SOCKETEVENTUSER_H
 #define SOCKETEVENTUSER_H
 
-#include "../SocketNetworkManager.h"
+#include "network/SocketNetworkManager.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SocketEventUser

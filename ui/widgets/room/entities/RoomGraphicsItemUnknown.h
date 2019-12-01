@@ -25,7 +25,7 @@
 #define _ROOMGRAPHICSITEMUNKNOWN_H
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/UnknownRenderer.h"
+#include "ui/widgets/room/renderers/UnknownRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RoomGraphicsItemUnknown

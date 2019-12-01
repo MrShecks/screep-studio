@@ -25,7 +25,7 @@
 #define ROOMGRAPHICSITEMCONTAINER_H
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/ContainerRenderer.h"
+#include "ui/widgets/room/renderers/ContainerRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ContainerEntity

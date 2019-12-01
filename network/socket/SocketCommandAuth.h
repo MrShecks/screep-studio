@@ -24,7 +24,7 @@
 #ifndef _SOCKETCOMMANDAUTH_H
 #define _SOCKETCOMMANDAUTH_H
 
-#include "../SocketNetworkManager.h"
+#include "network/SocketNetworkManager.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SocketCommandAuth

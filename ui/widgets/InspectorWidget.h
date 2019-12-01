@@ -26,8 +26,8 @@
 
 #include <QWidget>
 
-#include "../widgets/room/entities/RoomGraphicsItem.h"
-#include "./utils/JSONTreeModel.h"
+#include "ui/widgets/room/entities/RoomGraphicsItem.h"
+#include "utils/JSONTreeModel.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

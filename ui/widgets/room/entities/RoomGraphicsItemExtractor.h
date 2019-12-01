@@ -27,7 +27,7 @@
 #include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/ExtractorRenderer.h"
+#include "ui/widgets/room/renderers/ExtractorRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ExtractorEntity

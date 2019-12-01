@@ -24,19 +24,19 @@
 #include "NetworkModel.h"
 #include "ScreepsApi.h"
 
-#include "../network/rest/RestServerInfo.h"
-#include "../network/rest/RestAuthentication.h"
-#include "../network/rest/RestUserInfo.h"
-#include "../network/rest/GameInfo.h"
-#include "../network/rest/RestRoomTerrain.h"
-#include "../network/rest/RestConsoleCommand.h"
+#include "network/rest/RestServerInfo.h"
+#include "network/rest/RestAuthentication.h"
+#include "network/rest/RestUserInfo.h"
+#include "network/rest/GameInfo.h"
+#include "network/rest/RestRoomTerrain.h"
+#include "network/rest/RestConsoleCommand.h"
 
-#include "../network/socket/SocketCommandAuth.h"
-#include "../network/socket/SocketCommandSubscribe.h"
+#include "network/socket/SocketCommandAuth.h"
+#include "network/socket/SocketCommandSubscribe.h"
 
-#include "../network/socket/SocketEventUser.h"
-#include "../network/socket/SocketEventRoom.h"
-#include "../network/socket/SocketEventConsole.h"
+#include "network/socket/SocketEventUser.h"
+#include "network/socket/SocketEventRoom.h"
+#include "network/socket/SocketEventConsole.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // NetworkModel

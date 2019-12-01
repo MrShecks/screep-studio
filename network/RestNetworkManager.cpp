@@ -26,8 +26,8 @@
 #include <QJsonObject>
 
 #include "RestNetworkManager.h"
-#include "../utils/JSONUtils.h"
-#include "../ScreepsApi.h"
+#include "utils/JSONUtils.h"
+#include "ScreepsApi.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // NetworkResponse

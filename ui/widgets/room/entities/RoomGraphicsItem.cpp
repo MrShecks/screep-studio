@@ -49,8 +49,7 @@
 #include "RoomGraphicsItemObserver.h"
 
 #include "RoomGraphicsItemUnknown.h"
-
-#include "../RoomGraphicsScene.h"
+#include "ui/widgets/room/RoomGraphicsScene.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

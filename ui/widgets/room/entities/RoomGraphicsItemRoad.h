@@ -25,7 +25,7 @@
 #define _ROOMGRAPHICSITEMROAD_H
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/RoadRenderer.h"
+#include "ui/widgets/room/renderers/RoadRenderer.h"
 #include "models/room/RoomUtils.h"
 #include "utils/JSONUtils.h"
 

@@ -25,7 +25,7 @@
 #define _ROOMGRAPHICSITEMTOMBSTONE_H
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/TombstoneRenderer.h"
+#include "ui/widgets/room/renderers/TombstoneRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TombstoneEntity

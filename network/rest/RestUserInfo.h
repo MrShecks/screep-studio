@@ -25,7 +25,7 @@
 #define _RESTUSERINFO_H
 
 #include "ScreepsApi.h"
-#include "../RestNetworkManager.h"
+#include "network/RestNetworkManager.h"
 #include "Badge.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

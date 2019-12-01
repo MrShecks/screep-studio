@@ -26,7 +26,7 @@
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "../renderers/StorageRenderer.h"
+#include "ui/widgets/room/renderers/StorageRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // StorageEntity

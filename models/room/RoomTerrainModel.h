@@ -29,7 +29,7 @@
 
 #include "ScreepsApi.h"
 #include "RoomUtils.h"
-#include "../../network/rest/RestRoomTerrain.h"
+#include "network/rest/RestRoomTerrain.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RoomModel()

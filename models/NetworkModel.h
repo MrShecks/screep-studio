@@ -27,8 +27,8 @@
 #include <QObject>
 #include <QTimer>
 
-#include "../network/RestNetworkManager.h"
-#include "../network/SocketNetworkManager.h"
+#include "network/RestNetworkManager.h"
+#include "network/SocketNetworkManager.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Server Connection Flow Ideas

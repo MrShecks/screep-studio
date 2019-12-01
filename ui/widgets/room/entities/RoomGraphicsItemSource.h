@@ -26,7 +26,7 @@
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "../renderers/SourceRenderer.h"
+#include "ui/widgets/room/renderers/SourceRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SourceEntity

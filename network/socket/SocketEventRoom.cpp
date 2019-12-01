@@ -25,7 +25,7 @@
 #include <QRegularExpression>
 
 #include "SocketEventRoom.h"
-#include "../../utils/JSONUtils.h"
+#include "utils/JSONUtils.h"
 
 #include <QDebug>
 

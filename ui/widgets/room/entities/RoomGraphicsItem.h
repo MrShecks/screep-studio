@@ -28,8 +28,8 @@
 
 #include "ScreepsApi.h"
 #include "GraphicsItemSelection.h"
-#include "../../../../models/room/RoomEntity.h"
-#include "../../../../models/room/StorageRoomEntity.h"
+#include "models/room/RoomEntity.h"
+#include "models/room/StorageRoomEntity.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RoomGraphicsItem

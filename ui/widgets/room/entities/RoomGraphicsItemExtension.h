@@ -28,7 +28,7 @@
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "../renderers/ExtensionRenderer.h"
+#include "ui/widgets/room/renderers/ExtensionRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ExtensionEntity

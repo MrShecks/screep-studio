@@ -26,7 +26,7 @@
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "../renderers/MineralRenderer.h"
+#include "ui/widgets/room/renderers/MineralRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MineralEntity

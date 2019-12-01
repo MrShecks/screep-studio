@@ -25,7 +25,7 @@
 #define _RESTCONSOLECOMMAND_H
 
 #include "ScreepsApi.h"
-#include "../RestNetworkManager.h"
+#include "network/RestNetworkManager.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RestPostConsoleCommand (HTTP POST)

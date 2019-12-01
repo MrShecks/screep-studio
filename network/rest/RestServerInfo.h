@@ -24,9 +24,9 @@
 #ifndef _RESTSERVERINFO_H
 #define _RESTSERVERINFO_H
 
-#include "../RestNetworkManager.h"
-#include "../../utils/JSONUtils.h"
-#include "../../ScreepsApi.h"
+#include "network/RestNetworkManager.h"
+#include "utils/JSONUtils.h"
+#include "ScreepsApi.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RestRequestServerInfo

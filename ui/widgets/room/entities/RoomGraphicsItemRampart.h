@@ -25,7 +25,7 @@
 #define _ROOMGRAPHICSITEMRAMPART_H
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/RampartRenderer.h"
+#include "ui/widgets/room/renderers/RampartRenderer.h"
 #include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

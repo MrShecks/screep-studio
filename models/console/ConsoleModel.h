@@ -30,8 +30,8 @@
 #include <QHash>
 #include <QTime>
 
-#include "../../ScreepsApi.h"
-#include "../../network/SocketNetworkManager.h"
+#include "ScreepsApi.h"
+#include "network/SocketNetworkManager.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

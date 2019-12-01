@@ -25,7 +25,7 @@
 #define _RESTROOMTERRAIN_H
 
 #include "ScreepsApi.h"
-#include "../RestNetworkManager.h"
+#include "network/RestNetworkManager.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RestRequestRoomTerrain (HTTP GET)

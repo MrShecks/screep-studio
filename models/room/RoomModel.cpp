@@ -22,8 +22,8 @@
 */
 
 #include "RoomModel.h"
-#include "../../network/rest/RestRoomTerrain.h"
-#include "../../network/socket/SocketEventRoom.h"
+#include "network/rest/RestRoomTerrain.h"
+#include "network/socket/SocketEventRoom.h"
 
 #include <QDebug>
 

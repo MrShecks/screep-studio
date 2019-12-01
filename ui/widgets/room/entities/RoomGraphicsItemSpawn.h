@@ -27,7 +27,7 @@
 #include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/SpawnRenderer.h"
+#include "ui/widgets/room/renderers/SpawnRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SpawnEntity

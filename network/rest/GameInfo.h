@@ -25,7 +25,7 @@
 #define _GAMEINFO_H
 
 #include "ScreepsApi.h"
-#include "../RestNetworkManager.h"
+#include "network/RestNetworkManager.h"
 #include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -28,7 +28,7 @@
 #include <QQueue>
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/CreepRenderer.h"
+#include "ui/widgets/room/renderers/CreepRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CreepEntity

@@ -27,7 +27,7 @@
 #include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/PowerSpawnRenderer.h"
+#include "ui/widgets/room/renderers/PowerSpawnRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PowerSpawnEntity

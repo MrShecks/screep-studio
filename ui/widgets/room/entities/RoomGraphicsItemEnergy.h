@@ -25,7 +25,7 @@
 #define _ROOMGRAPHICSITEMENERGY_H
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/EnergyRenderer.h"
+#include "ui/widgets/room/renderers/EnergyRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // EnergyEntity

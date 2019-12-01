@@ -24,9 +24,9 @@
 #include <QBrush>
 
 #include "ConsoleModel.h"
-#include "../NetworkModel.h"
-#include "../../utils/JSONUtils.h"
-#include "../../network/socket/SocketEventConsole.h"
+#include "models/NetworkModel.h"
+#include "utils/JSONUtils.h"
+#include "network/socket/SocketEventConsole.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

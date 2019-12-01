@@ -25,7 +25,7 @@
 #define _ROOMGRAPHICSITEMWALL_H
 
 #include "RoomGraphicsItem.h"
-#include "../renderers/WallRenderer.h"
+#include "ui/widgets/room/renderers/WallRenderer.h"
 #include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

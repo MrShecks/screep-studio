@@ -26,7 +26,7 @@
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "../renderers/ControllerRenderer.h"
+#include "ui/widgets/room/renderers/ControllerRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ControllerEntity
