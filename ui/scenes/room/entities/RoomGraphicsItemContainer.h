@@ -1,6 +1,6 @@
 /*
- * File: RoomGraphicsItemTerminal.h
- * Created: 2019-1-18
+ * File: RoomGraphicsItemContainer.h
+ * Created: 2019-1-6
  *
  * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
@@ -21,22 +21,21 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMTERMINAL_H
-#define _ROOMGRAPHICSITEMTERMINAL_H
+#ifndef ROOMGRAPHICSITEMCONTAINER_H
+#define ROOMGRAPHICSITEMCONTAINER_H
 
 #include "RoomGraphicsItem.h"
-#include "GraphicsItemGlow.h"
-#include "ui/widgets/room/renderers/TerminalRenderer.h"
+#include "ui/scenes/room/renderers/ContainerRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// TerminalEntity
+// ContainerEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class TerminalEntity : public StorageRoomEntity {
+class ContainerEntity : public StorageRoomEntity {
     typedef StorageRoomEntity _super;
 
 public:
-    TerminalEntity(const RoomEntity& entity)
+    ContainerEntity(const RoomEntity& entity)
         : _super(entity) {
 
     }
@@ -44,7 +43,7 @@ public:
     int power() const                   { return getStoredResourceAmount(Screeps::ResourceType_POWER); }
     int energy() const                  { return getStoredResourceAmount(Screeps::ResourceType_ENERGY); }
 
-    int energyCapacity() const          { return getStoreCapacity(); }
+    int energyCapacity() const          { return getInt("energyCapacity"); }
 
     int getStoredResourceAmount(Screeps::ResourceType type) const {
         return _super::getStoredResourceAmount(Screeps::RESOURCES_ALL[type]);
@@ -61,22 +60,18 @@ public:
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemTerminal
+// RoomGraphicsItemContainer
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemTerminal : public TRoomGraphicsItem<TerminalEntity> {
-    typedef TRoomGraphicsItem<TerminalEntity> _super;
-
-    static constexpr qreal GLOW_EFFECT_SCALE    = 2.0;
-    static constexpr qreal GLOW_EFFECT_OPACITY  = 0.5;
+class RoomGraphicsItemContainer : public TRoomGraphicsItem<ContainerEntity> {
+    typedef TRoomGraphicsItem<ContainerEntity> _super;
 
 public:
-    RoomGraphicsItemTerminal(const TerminalEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemTerminal();
+    RoomGraphicsItemContainer(const ContainerEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemContainer();
 
 private:
-    TerminalRenderer _terminalRenderer;
-    GraphicsItemGlow _glow;
+    ContainerRenderer _containerRenderer;
 
     //
     // TRoomGraphicsItem
@@ -84,7 +79,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const TerminalEntity& current, const TerminalEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const ContainerEntity& current, const ContainerEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMTERMINAL_H
+#endif // ROOMGRAPHICSITEMCONTAINER_H

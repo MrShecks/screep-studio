@@ -1,8 +1,8 @@
 /*
- * File: RoomGraphicsItemWall.h
- * Created: 2018-12-15
+ * File: RoomGraphicsItemObserver.h
+ * Created: 2019-2-1
  *
- * Copyright (c) shecks 2018 <shecks@gmail.com>
+ * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
  *
  * This file is part of %QT_PROJECT_NAME%.
@@ -21,49 +21,51 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMWALL_H
-#define _ROOMGRAPHICSITEMWALL_H
+#ifndef _ROOMGRAPHICSITEMOBSERVER_H
+#define _ROOMGRAPHICSITEMOBSERVER_H
+
+#include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "ui/widgets/room/renderers/WallRenderer.h"
-#include "utils/JSONUtils.h"
+#include "ui/scenes/room/renderers/ObserverRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// WallEntity
+// ObserverEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class WallEntity : public RoomEntity {
+class ObserverEntity : public RoomEntity {
     typedef RoomEntity _super;
 
 public:
-    WallEntity(const RoomEntity& entity)
+    ObserverEntity(const RoomEntity& entity)
         : _super(entity) {
 
-    }
-
-    int hits() const                            { return getInt("hits"); }
-    int hitsMax() const                         { return getInt("hitsMax"); }
-
-    RoomUtils::NeighbourFlags neighbours() const {
-        return static_cast<RoomUtils::NeighbourFlags>(JSONUtils::getInt(getMetaData(), "neighbours"));
     }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemWall
+// RoomGraphicsItemObserver
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemWall : public TRoomGraphicsItem<WallEntity> {
-    typedef TRoomGraphicsItem<WallEntity> _super;
+class RoomGraphicsItemObserver : public TRoomGraphicsItem<ObserverEntity> {
+    typedef TRoomGraphicsItem<ObserverEntity> _super;
 
-    static const int PEN_WIDTH  = 1;
+    Q_OBJECT
+    Q_PROPERTY(qreal eyeRotation READ eyeRotation WRITE setEyeRotation)
+
+    static const int EYE_ROTATE_DURATION        = (1000 * 2);
 
 public:
-    RoomGraphicsItemWall(const WallEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemWall();
+    RoomGraphicsItemObserver(const ObserverEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemObserver();
+
+    qreal eyeRotation() const;
+    void setEyeRotation(qreal eyeRotation);
 
 private:
-    WallRenderer _wallRenderer;
+    QPropertyAnimation _rotateAnimation;
+    ObserverRenderer _observerRenderer;
+    qreal _eyeRotation;
 
     //
     // TRoomGraphicsItem
@@ -71,7 +73,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const WallEntity& current, const WallEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const ObserverEntity& current, const ObserverEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMWALL_H
+#endif // _ROOMGRAPHICSITEMOBSERVER_H

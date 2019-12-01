@@ -1,5 +1,5 @@
 /*
- * File: RoomGraphicsItemMineral.h
+ * File: RoomGraphicsItemUnknown.h
  * Created: 2018-12-11
  *
  * Copyright (c) shecks 2018 <shecks@gmail.com>
@@ -21,48 +21,25 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMMINERAL_H
-#define _ROOMGRAPHICSITEMMINERAL_H
+#ifndef _ROOMGRAPHICSITEMUNKNOWN_H
+#define _ROOMGRAPHICSITEMUNKNOWN_H
 
 #include "RoomGraphicsItem.h"
-#include "GraphicsItemGlow.h"
-#include "ui/widgets/room/renderers/MineralRenderer.h"
+#include "ui/scenes/room/renderers/UnknownRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MineralEntity
+// RoomGraphicsItemUnknown
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class MineralEntity : public RoomEntity {
-    typedef RoomEntity _super;
+class RoomGraphicsItemUnknown : public TRoomGraphicsItem<RoomEntity> {
+    typedef TRoomGraphicsItem<RoomEntity> _super;
 
 public:
-
-    MineralEntity(const RoomEntity& entity)
-        : _super(entity) {
-
-    }
-
-    QString mineralType() const                 { return getString("mineralType", "?"); }
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemMineral
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-class RoomGraphicsItemMineral : public TRoomGraphicsItem<MineralEntity> {
-    typedef TRoomGraphicsItem<MineralEntity> _super;
-
-    static constexpr qreal GLOW_EFFECT_SCALE        = 1.5;
-    static constexpr qreal GLOW_EFFECT_OPACITY_MIN  = 0.5;
-    static constexpr qreal GLOW_EFFECT_OPACITY_MAX  = 0.9;
-
-public:
-    RoomGraphicsItemMineral(const MineralEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemMineral();
+    RoomGraphicsItemUnknown(const RoomEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemUnknown();
 
 private:
-    MineralRenderer _mineralRenderer;
-    GraphicsItemGlow _glow;
+    UnknownRenderer _unknownRenderer;
 
     //
     // TRoomGraphicsItem
@@ -72,4 +49,4 @@ private:
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMMINERAL_H
+#endif // _ROOMGRAPHICSITEMUNKNOWN_H

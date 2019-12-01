@@ -1,8 +1,8 @@
 /*
- * File: RoomGraphicsItemSpawn.h
- * Created: 2018-12-11
+ * File: RoomGraphicsItemEnergy.h
+ * Created: 2019-1-18
  *
- * Copyright (c) shecks 2018 <shecks@gmail.com>
+ * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
  *
  * This file is part of %QT_PROJECT_NAME%.
@@ -21,56 +21,42 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMSPAWN_H
-#define _ROOMGRAPHICSITEMSPAWN_H
-
-#include <QPropertyAnimation>
+#ifndef _ROOMGRAPHICSITEMENERGY_H
+#define _ROOMGRAPHICSITEMENERGY_H
 
 #include "RoomGraphicsItem.h"
-#include "ui/widgets/room/renderers/SpawnRenderer.h"
+#include "ui/scenes/room/renderers/EnergyRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SpawnEntity
+// EnergyEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class SpawnEntity : public StorageRoomEntity {
-    typedef StorageRoomEntity _super;
+class EnergyEntity : public RoomEntity {
+    typedef RoomEntity _super;
 
 public:
-    enum State {
-        State_Idle,
-        State_Spawning
-    };
-
-    SpawnEntity(const RoomEntity& entity)
+    EnergyEntity(const RoomEntity& entity)
         : _super(entity) {
+
     }
 
-    State state() const                 { return hasObject("spawning") ? State_Spawning : State_Idle; }
-
-    int energy() const                  { return getStoredResourceAmount("energy"); }
-    int energyCapacity() const          { return getStoredResourceCapacity("energy"); }
-
-    int elapsedSpawnTime() const;
-    int totalSpawnTime() const;
+    int energy() const                          { return getInt("energy"); }
+    int energyCapacity() const                  { return Screeps::MAX_DROPPED_ENERGY; }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemSpawn
+// RoomGraphicsItemEnergy
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemSpawn : public TRoomGraphicsItem<SpawnEntity> {
-    typedef TRoomGraphicsItem<SpawnEntity> _super;
-
-    static const int SPAWN_ANIMATION_DURATION   = 3000;
+class RoomGraphicsItemEnergy : public TRoomGraphicsItem<EnergyEntity> {
+    typedef TRoomGraphicsItem<EnergyEntity> _super;
 
 public:
-    RoomGraphicsItemSpawn(const SpawnEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemSpawn();
+    RoomGraphicsItemEnergy(const EnergyEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemEnergy();
 
 private:
-    SpawnRenderer _spawnRenderer;
-    QPropertyAnimation _spawnAnimation;
+    EnergyRenderer _energyRenderer;
 
     //
     // TRoomGraphicsItem
@@ -78,7 +64,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const SpawnEntity& current, const SpawnEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const EnergyEntity& current, const EnergyEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMSPAWN_H
+#endif // _ROOMGRAPHICSITEMENERGY_H

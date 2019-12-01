@@ -1,6 +1,6 @@
 /*
- * File: RoomGraphicsItemPowerSpawn.h
- * Created: 2019-1-31
+ * File: RoomGraphicsItemRoad.h
+ * Created: 2019-1-4
  *
  * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
@@ -21,48 +21,47 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMPOWERSPAWN_H
-#define _ROOMGRAPHICSITEMPOWERSPAWN_H
-
-#include <QPropertyAnimation>
+#ifndef _ROOMGRAPHICSITEMROAD_H
+#define _ROOMGRAPHICSITEMROAD_H
 
 #include "RoomGraphicsItem.h"
-#include "ui/widgets/room/renderers/PowerSpawnRenderer.h"
+#include "ui/scenes/room/renderers/RoadRenderer.h"
+#include "models/room/RoomUtils.h"
+#include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// PowerSpawnEntity
+// RoadEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class PowerSpawnEntity : public StorageRoomEntity {
-    typedef StorageRoomEntity _super;
+class RoadEntity : public RoomEntity {
+    typedef RoomEntity _super;
 
 public:
-    PowerSpawnEntity(const RoomEntity& entity)
+
+    RoadEntity(const RoomEntity& entity)
         : _super(entity) {
+
     }
 
-    int energy() const                  { return getStoredResourceAmount("energy"); }
-    int energyCapacity() const          { return getStoredResourceCapacity("energy"); }
+    RoomUtils::NeighbourFlags neighbours() const {
+        return static_cast<RoomUtils::NeighbourFlags>(JSONUtils::getInt(getMetaData(), "neighbours"));
+    }
 
-    int power() const                   { return getStoredResourceAmount("power"); }
-    int powerCapacity() const           { return getStoredResourceCapacity("power"); }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemPowerSpawn
+// RoomGraphicsItemRoad
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemPowerSpawn : public TRoomGraphicsItem<PowerSpawnEntity> {
-    typedef TRoomGraphicsItem<PowerSpawnEntity> _super;
-
-    static const int SPAWN_ANIMATION_DURATION   = 3000;
+class RoomGraphicsItemRoad : public TRoomGraphicsItem<RoadEntity> {
+    typedef TRoomGraphicsItem<RoadEntity> _super;
 
 public:
-    RoomGraphicsItemPowerSpawn(const PowerSpawnEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemPowerSpawn();
+    RoomGraphicsItemRoad(const RoadEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemRoad();
 
 private:
-    PowerSpawnRenderer _powerSpawnRenderer;
+    RoadRenderer _roadRenderer;
 
     //
     // TRoomGraphicsItem
@@ -70,8 +69,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const PowerSpawnEntity& current, const PowerSpawnEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const RoadEntity& current, const RoadEntity& updated) Q_DECL_OVERRIDE;
 };
 
-
-#endif // _ROOMGRAPHICSITEMPOWERSPAWN_H
+#endif // _ROOMGRAPHICSITEMROAD_H

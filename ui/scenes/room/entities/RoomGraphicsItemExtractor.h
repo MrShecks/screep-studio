@@ -1,6 +1,6 @@
 /*
- * File: RoomGraphicsItemNuker.h
- * Created: 2019-1-23
+ * File: RoomGraphicsItemExtractor.h
+ * Created: 2019-1-9
  *
  * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
@@ -21,54 +21,56 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMNUKER_H
-#define _ROOMGRAPHICSITEMNUKER_H
+#ifndef _ROOMGRAPHICSITEMEXTRACTOR_H
+#define _ROOMGRAPHICSITEMEXTRACTOR_H
 
+#include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "ui/widgets/room/renderers/NukerRenderer.h"
+#include "ui/scenes/room/renderers/ExtractorRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// NukerEntity
+// ExtractorEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class NukerEntity : public StorageRoomEntity {
-    typedef StorageRoomEntity _super;
+class ExtractorEntity : public RoomEntity {
+    typedef RoomEntity _super;
 
 public:
-    NukerEntity(const RoomEntity& entity)
+    ExtractorEntity(const RoomEntity& entity)
         : _super(entity) {
 
     }
 
-    int energy() const                          { return getStoredResourceAmount("energy"); }
-    int energyCapacity() const                  { return getStoredResourceCapacity("energy"); }
-
-    int resources() const                       { return getStoredResourceAmount("G"); }
-    int resourceCapacity() const                { return getStoredResourceCapacity("G"); }
+    int cooldown() const                        { return getInt("cooldown"); }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemNuker
+// RoomGraphicsItemExtractor
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemNuker : public TRoomGraphicsItem<NukerEntity> {
-    typedef TRoomGraphicsItem<NukerEntity> _super;
+class RoomGraphicsItemExtractor : public TRoomGraphicsItem<ExtractorEntity> {
+    typedef TRoomGraphicsItem<ExtractorEntity> _super;
+
+    Q_OBJECT
+    Q_PROPERTY(qreal extractorRotation READ extractorRotation WRITE setExtractorRotation)
+
+    static const int ROTATE_ANIMATION_DURATION = 1000 * 5;
 
 public:
-    RoomGraphicsItemNuker(const NukerEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemNuker();
+    RoomGraphicsItemExtractor(const ExtractorEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemExtractor();
+
+    qreal extractorRotation() const;
+    void setExtractorRotation(qreal extractorRotation);
 
 private:
-    NukerRenderer _nukerRenderer;
-
-    //
-    // TRoomGraphicsItem
-    //
+    ExtractorRenderer _extractorRenderer;
+    QPropertyAnimation _rotationAnimator;
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const NukerEntity& current, const NukerEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const ExtractorEntity& current, const ExtractorEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMNUKER_H
+#endif // _ROOMGRAPHICSITEMEXTRACTOR_H

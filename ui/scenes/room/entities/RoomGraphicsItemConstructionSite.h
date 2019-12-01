@@ -1,8 +1,8 @@
 /*
- * File: RoomGraphicsItemRampart.h
- * Created: 2019-1-24
+ * File: RoomGraphicsItemConstructionSite.h
+ * Created: 2018-12-11
  *
- * Copyright (c) shecks 2019 <shecks@gmail.com>
+ * Copyright (c) shecks 2018 <shecks@gmail.com>
  * All rights reserved.
  *
  * This file is part of %QT_PROJECT_NAME%.
@@ -21,47 +21,46 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMRAMPART_H
-#define _ROOMGRAPHICSITEMRAMPART_H
+#ifndef _ROOMGRAPHICSITEMCONSTRUCTIONSITE_H
+#define _ROOMGRAPHICSITEMCONSTRUCTIONSITE_H
+
+#include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "ui/widgets/room/renderers/RampartRenderer.h"
-#include "utils/JSONUtils.h"
+#include "ui/scenes/room/renderers/ConstructionSiteRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RampartEntity
+// ConstructionSiteEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RampartEntity : public RoomEntity {
+class ConstructionSiteEntity : public RoomEntity {
     typedef RoomEntity _super;
 
 public:
-    RampartEntity(const RoomEntity& entity)
+    ConstructionSiteEntity(const RoomEntity& entity)
         : _super(entity) {
-
     }
 
-    int hits() const                            { return getInt("hits"); }
-    int hitsMax() const                         { return getInt("hitsMax"); }
-
-    RoomUtils::NeighbourFlags neighbours() const {
-        return static_cast<RoomUtils::NeighbourFlags>(JSONUtils::getInt(getMetaData(), "neighbours"));
-    }
+    int progress() const                        { return getInt("progress"); }
+    int progressTotal() const                   { return getInt("progressTotal"); }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemRampart
+// RoomGraphicsItemConstructionSite
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemRampart : public TRoomGraphicsItem<RampartEntity> {
-    typedef TRoomGraphicsItem<RampartEntity> _super;
+class RoomGraphicsItemConstructionSite : public TRoomGraphicsItem<ConstructionSiteEntity> {
+    typedef TRoomGraphicsItem<ConstructionSiteEntity> _super;
+
+    static const int FADE_DURATION                  = 1000 * 3;
 
 public:
-    RoomGraphicsItemRampart(const RampartEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemRampart();
+    RoomGraphicsItemConstructionSite(const ConstructionSiteEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemConstructionSite();
 
 private:
-    RampartRenderer _rampartRenderer;
+    QPropertyAnimation* _opacityAnimation;
+    ConstructionSiteRenderer _constructionSiteRenderer;
 
     //
     // TRoomGraphicsItem
@@ -69,7 +68,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const RampartEntity& current, const RampartEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const ConstructionSiteEntity& current, const ConstructionSiteEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMRAMPART_H
+#endif // _ROOMGRAPHICSITEMCONSTRUCTIONSITE_H

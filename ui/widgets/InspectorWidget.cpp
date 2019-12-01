@@ -26,7 +26,7 @@
 #include "InspectorWidget.h"
 #include "ui_InspectorWidget.h"
 
-#include "./room/RoomGraphicsScene.h"
+#include "ui/scenes/room/RoomGraphicsScene.h"
 
 #ifdef QT_DEBUG
 #include <QDebug>

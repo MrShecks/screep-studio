@@ -1,8 +1,8 @@
 /*
- * File: RoomGraphicsItemController.h
- * Created: 2018-12-11
+ * File: RoomGraphicsItemLink.h
+ * Created: 2019-1-15
  *
- * Copyright (c) shecks 2018 <shecks@gmail.com>
+ * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
  *
  * This file is part of %QT_PROJECT_NAME%.
@@ -21,54 +21,61 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMCONTROLLER_H
-#define _ROOMGRAPHICSITEMCONTROLLER_H
+#ifndef _ROOMGRAPHICSITEMLINK_H
+#define _ROOMGRAPHICSITEMLINK_H
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "ui/widgets/room/renderers/ControllerRenderer.h"
+#include "ui/scenes/room/renderers/LinkRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ControllerEntity
+// LinkEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ControllerEntity : public RoomEntity {
-    typedef RoomEntity _super;
+class LinkEntity : public StorageRoomEntity {
+    typedef StorageRoomEntity _super;
 
 public:
-    ControllerEntity(const RoomEntity& entity)
-        : _super(entity) {
-    }
 
-    int level() const                           { return getInt("level"); }
+    enum State {
+        State_Idle,
+        State_TransferingEnergy
+    };
+
+    LinkEntity(const RoomEntity& entity);
+
+    State state() const                 { return getActionState(); }
+
+    int energy() const                  { return getStoredResourceAmount("energy"); }
+    int energyCapacity() const          { return getStoredResourceCapacity("energy"); }
+
+    QPoint transferTarget() const;
+
+private:
+    State getActionState(QJsonObject *pAction = nullptr) const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemSpawn
+// RoomGraphicsItemLink
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemController : public TRoomGraphicsItem<ControllerEntity> {
-    typedef TRoomGraphicsItem<ControllerEntity> _super;
+class RoomGraphicsItemLink : public TRoomGraphicsItem<LinkEntity> {
+    typedef TRoomGraphicsItem<LinkEntity> _super;
 
-    static constexpr qreal GLOW_EFFECT_SCALE        = 0.8;
-    static constexpr qreal GLOW_EFFECT_OPACITY_MIN  = 0.2;
-    static constexpr qreal GLOW_EFFECT_OPACITY_MAX  = 0.9;
+    static constexpr qreal GLOW_EFFECT_SCALE    = 1.5;
+    static constexpr qreal GLOW_EFFECT_OPACITY  = 0.2;
 
 public:
-    RoomGraphicsItemController(const ControllerEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemController();
+    RoomGraphicsItemLink(const LinkEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemLink();
 
 private:
-    ControllerRenderer _controllerRenderer;
+    LinkRenderer _linkRenderer;
     GraphicsItemGlow _glow;
-
-    //
-    // TRoomGraphicsItem
-    //
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const ControllerEntity& current, const ControllerEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const LinkEntity& current, const LinkEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMCONTROLLER_H
+#endif // _ROOMGRAPHICSITEMLINK_H

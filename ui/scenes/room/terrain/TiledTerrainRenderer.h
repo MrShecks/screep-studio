@@ -25,7 +25,7 @@
 #define _TILEDTERRAINRENDERER_H
 
 #include "TerrainRenderer.h"
-#include "ui/widgets/room/utils/TerrainTileset.h"
+#include "ui/scenes/room/utils/TerrainTileset.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

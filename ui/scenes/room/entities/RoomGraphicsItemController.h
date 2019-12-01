@@ -1,5 +1,5 @@
 /*
- * File: RoomGraphicsItemSource.h
+ * File: RoomGraphicsItemController.h
  * Created: 2018-12-11
  *
  * Copyright (c) shecks 2018 <shecks@gmail.com>
@@ -21,56 +21,54 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMSOURCE_H
-#define _ROOMGRAPHICSITEMSOURCE_H
+#ifndef _ROOMGRAPHICSITEMCONTROLLER_H
+#define _ROOMGRAPHICSITEMCONTROLLER_H
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "ui/widgets/room/renderers/SourceRenderer.h"
+#include "ui/scenes/room/renderers/ControllerRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SourceEntity
+// ControllerEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class SourceEntity : public RoomEntity {
+class ControllerEntity : public RoomEntity {
     typedef RoomEntity _super;
 
 public:
-    SourceEntity(const RoomEntity& entity)
+    ControllerEntity(const RoomEntity& entity)
         : _super(entity) {
-
     }
 
-    int energy() const                  { return getInt("energy"); }
-    int energyCapacity() const          { return getInt("energyCapacity"); }
-
+    int level() const                           { return getInt("level"); }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemSource
+// RoomGraphicsItemSpawn
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemSource : public TRoomGraphicsItem<SourceEntity> {
-    typedef TRoomGraphicsItem<SourceEntity> _super;
+class RoomGraphicsItemController : public TRoomGraphicsItem<ControllerEntity> {
+    typedef TRoomGraphicsItem<ControllerEntity> _super;
 
-    static constexpr qreal GLOW_EFFECT_SCALE        = 2.0;
+    static constexpr qreal GLOW_EFFECT_SCALE        = 0.8;
     static constexpr qreal GLOW_EFFECT_OPACITY_MIN  = 0.2;
-    static constexpr qreal GLOW_EFFECT_OPACITY_MAX  = 0.7;
+    static constexpr qreal GLOW_EFFECT_OPACITY_MAX  = 0.9;
 
 public:
-    RoomGraphicsItemSource(const SourceEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemSource();
+    RoomGraphicsItemController(const ControllerEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemController();
 
 private:
-    SourceRenderer _sourceRenderer;
+    ControllerRenderer _controllerRenderer;
     GraphicsItemGlow _glow;
 
-    int energy() const;
-    int energyCapacity() const;
+    //
+    // TRoomGraphicsItem
+    //
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const SourceEntity& current, const SourceEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const ControllerEntity& current, const ControllerEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMSOURCE_H
+#endif // _ROOMGRAPHICSITEMCONTROLLER_H

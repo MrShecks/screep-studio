@@ -1,8 +1,8 @@
 /*
- * File: RoomGraphicsItemLink.h
- * Created: 2019-1-15
+ * File: RoomGraphicsItemTombstone.h
+ * Created: 2018-12-29
  *
- * Copyright (c) shecks 2019 <shecks@gmail.com>
+ * Copyright (c) shecks 2018 <shecks@gmail.com>
  * All rights reserved.
  *
  * This file is part of %QT_PROJECT_NAME%.
@@ -21,61 +21,59 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMLINK_H
-#define _ROOMGRAPHICSITEMLINK_H
+#ifndef _ROOMGRAPHICSITEMTOMBSTONE_H
+#define _ROOMGRAPHICSITEMTOMBSTONE_H
 
 #include "RoomGraphicsItem.h"
-#include "GraphicsItemGlow.h"
-#include "ui/widgets/room/renderers/LinkRenderer.h"
+#include "ui/scenes/room/renderers/TombstoneRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// LinkEntity
+// TombstoneEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class LinkEntity : public StorageRoomEntity {
-    typedef StorageRoomEntity _super;
+class TombstoneEntity : public RoomEntity {
+    typedef RoomEntity _super;
 
 public:
+    TombstoneEntity(const RoomEntity& entity)
+        : _super(entity) {
 
-    enum State {
-        State_Idle,
-        State_TransferingEnergy
-    };
+    }
 
-    LinkEntity(const RoomEntity& entity);
+    int decayTime() const                       { return getInt("decayTime"); }
+    int deathTime() const                       { return getInt("deathTime"); }
 
-    State state() const                 { return getActionState(); }
+    int getTotalResources() const {
+        int totalResources = 0;
 
-    int energy() const                  { return getStoredResourceAmount("energy"); }
-    int energyCapacity() const          { return getStoredResourceCapacity("energy"); }
+        for(const QString& resourceName : Screeps::RESOURCES_ALL)
+            totalResources += getInt(resourceName, 0);
 
-    QPoint transferTarget() const;
-
-private:
-    State getActionState(QJsonObject *pAction = nullptr) const;
+        return totalResources;
+    }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemLink
+// RoomGraphicsItemTombstone
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemLink : public TRoomGraphicsItem<LinkEntity> {
-    typedef TRoomGraphicsItem<LinkEntity> _super;
-
-    static constexpr qreal GLOW_EFFECT_SCALE    = 1.5;
-    static constexpr qreal GLOW_EFFECT_OPACITY  = 0.2;
+class RoomGraphicsItemTombstone : public TRoomGraphicsItem<TombstoneEntity> {
+    typedef TRoomGraphicsItem<TombstoneEntity> _super;
 
 public:
-    RoomGraphicsItemLink(const LinkEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemLink();
+    RoomGraphicsItemTombstone(const TombstoneEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemTombstone();
 
 private:
-    LinkRenderer _linkRenderer;
-    GraphicsItemGlow _glow;
+    TombstoneRenderer _tombstoneRenderer;
+
+    //
+    // TRoomGraphicsItem
+    //
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const LinkEntity& current, const LinkEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const TombstoneEntity& current, const TombstoneEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMLINK_H
+#endif // _ROOMGRAPHICSITEMTOMBSTONE_H

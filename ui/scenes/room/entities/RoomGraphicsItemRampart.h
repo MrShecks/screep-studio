@@ -1,6 +1,6 @@
 /*
- * File: RoomGraphicsItemContainer.h
- * Created: 2019-1-6
+ * File: RoomGraphicsItemRampart.h
+ * Created: 2019-1-24
  *
  * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
@@ -21,57 +21,47 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef ROOMGRAPHICSITEMCONTAINER_H
-#define ROOMGRAPHICSITEMCONTAINER_H
+#ifndef _ROOMGRAPHICSITEMRAMPART_H
+#define _ROOMGRAPHICSITEMRAMPART_H
 
 #include "RoomGraphicsItem.h"
-#include "ui/widgets/room/renderers/ContainerRenderer.h"
+#include "ui/scenes/room/renderers/RampartRenderer.h"
+#include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ContainerEntity
+// RampartEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ContainerEntity : public StorageRoomEntity {
-    typedef StorageRoomEntity _super;
+class RampartEntity : public RoomEntity {
+    typedef RoomEntity _super;
 
 public:
-    ContainerEntity(const RoomEntity& entity)
+    RampartEntity(const RoomEntity& entity)
         : _super(entity) {
 
     }
 
-    int power() const                   { return getStoredResourceAmount(Screeps::ResourceType_POWER); }
-    int energy() const                  { return getStoredResourceAmount(Screeps::ResourceType_ENERGY); }
+    int hits() const                            { return getInt("hits"); }
+    int hitsMax() const                         { return getInt("hitsMax"); }
 
-    int energyCapacity() const          { return getInt("energyCapacity"); }
-
-    int getStoredResourceAmount(Screeps::ResourceType type) const {
-        return _super::getStoredResourceAmount(Screeps::RESOURCES_ALL[type]);
-    }
-
-    int getTotalResources() const {
-        int totalResources = 0;
-
-        for(const QString& resourceName : Screeps::RESOURCES_ALL)
-            totalResources += _super::getStoredResourceAmount(resourceName);
-
-        return totalResources;
+    RoomUtils::NeighbourFlags neighbours() const {
+        return static_cast<RoomUtils::NeighbourFlags>(JSONUtils::getInt(getMetaData(), "neighbours"));
     }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemContainer
+// RoomGraphicsItemRampart
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemContainer : public TRoomGraphicsItem<ContainerEntity> {
-    typedef TRoomGraphicsItem<ContainerEntity> _super;
+class RoomGraphicsItemRampart : public TRoomGraphicsItem<RampartEntity> {
+    typedef TRoomGraphicsItem<RampartEntity> _super;
 
 public:
-    RoomGraphicsItemContainer(const ContainerEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemContainer();
+    RoomGraphicsItemRampart(const RampartEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemRampart();
 
 private:
-    ContainerRenderer _containerRenderer;
+    RampartRenderer _rampartRenderer;
 
     //
     // TRoomGraphicsItem
@@ -79,7 +69,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const ContainerEntity& current, const ContainerEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const RampartEntity& current, const RampartEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // ROOMGRAPHICSITEMCONTAINER_H
+#endif // _ROOMGRAPHICSITEMRAMPART_H

@@ -1,8 +1,8 @@
 /*
- * File: RoomGraphicsItemLab.h
- * Created: 2019-1-22
+ * File: RoomGraphicsItemSpawn.h
+ * Created: 2018-12-11
  *
- * Copyright (c) shecks 2019 <shecks@gmail.com>
+ * Copyright (c) shecks 2018 <shecks@gmail.com>
  * All rights reserved.
  *
  * This file is part of %QT_PROJECT_NAME%.
@@ -21,53 +21,56 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMLAB_H
-#define _ROOMGRAPHICSITEMLAB_H
+#ifndef _ROOMGRAPHICSITEMSPAWN_H
+#define _ROOMGRAPHICSITEMSPAWN_H
+
+#include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "ui/widgets/room/renderers/LabRenderer.h"
+#include "ui/scenes/room/renderers/SpawnRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// LabEntity
+// SpawnEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class LabEntity : public StorageRoomEntity {
+class SpawnEntity : public StorageRoomEntity {
     typedef StorageRoomEntity _super;
 
 public:
     enum State {
         State_Idle,
-        State_Reacting
+        State_Spawning
     };
 
-    LabEntity(const RoomEntity& entity);
+    SpawnEntity(const RoomEntity& entity)
+        : _super(entity) {
+    }
 
-    State state() const                         { return _state; }
+    State state() const                 { return hasObject("spawning") ? State_Spawning : State_Idle; }
 
-    int energy() const                          { return getStoredResourceAmount("energy"); }
-    int energyCapacity() const                  { return getStoredResourceAmount ("energy"); }
+    int energy() const                  { return getStoredResourceAmount("energy"); }
+    int energyCapacity() const          { return getStoredResourceCapacity("energy"); }
 
-    QPoint reactionSource() const;
-    QPoint reactionTarget() const;
-
-private:
-    State _state;
-    QJsonObject _action;
+    int elapsedSpawnTime() const;
+    int totalSpawnTime() const;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemLab
+// RoomGraphicsItemSpawn
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemLab : public TRoomGraphicsItem<LabEntity> {
-    typedef TRoomGraphicsItem<LabEntity> _super;
+class RoomGraphicsItemSpawn : public TRoomGraphicsItem<SpawnEntity> {
+    typedef TRoomGraphicsItem<SpawnEntity> _super;
+
+    static const int SPAWN_ANIMATION_DURATION   = 3000;
 
 public:
-    RoomGraphicsItemLab(const LabEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemLab();
+    RoomGraphicsItemSpawn(const SpawnEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemSpawn();
 
 private:
-    LabRenderer _labRenderer;
+    SpawnRenderer _spawnRenderer;
+    QPropertyAnimation _spawnAnimation;
 
     //
     // TRoomGraphicsItem
@@ -75,7 +78,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const LabEntity& current, const LabEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const SpawnEntity& current, const SpawnEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMLAB_H
+#endif // _ROOMGRAPHICSITEMSPAWN_H

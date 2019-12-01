@@ -1,8 +1,8 @@
 /*
- * File: RoomGraphicsItemConstructionSite.h
- * Created: 2018-12-11
+ * File: RoomGraphicsItemLab.h
+ * Created: 2019-1-22
  *
- * Copyright (c) shecks 2018 <shecks@gmail.com>
+ * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
  *
  * This file is part of %QT_PROJECT_NAME%.
@@ -21,46 +21,53 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMCONSTRUCTIONSITE_H
-#define _ROOMGRAPHICSITEMCONSTRUCTIONSITE_H
-
-#include <QPropertyAnimation>
+#ifndef _ROOMGRAPHICSITEMLAB_H
+#define _ROOMGRAPHICSITEMLAB_H
 
 #include "RoomGraphicsItem.h"
-#include "ui/widgets/room/renderers/ConstructionSiteRenderer.h"
+#include "ui/scenes/room/renderers/LabRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ConstructionSiteEntity
+// LabEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ConstructionSiteEntity : public RoomEntity {
-    typedef RoomEntity _super;
+class LabEntity : public StorageRoomEntity {
+    typedef StorageRoomEntity _super;
 
 public:
-    ConstructionSiteEntity(const RoomEntity& entity)
-        : _super(entity) {
-    }
+    enum State {
+        State_Idle,
+        State_Reacting
+    };
 
-    int progress() const                        { return getInt("progress"); }
-    int progressTotal() const                   { return getInt("progressTotal"); }
+    LabEntity(const RoomEntity& entity);
+
+    State state() const                         { return _state; }
+
+    int energy() const                          { return getStoredResourceAmount("energy"); }
+    int energyCapacity() const                  { return getStoredResourceAmount ("energy"); }
+
+    QPoint reactionSource() const;
+    QPoint reactionTarget() const;
+
+private:
+    State _state;
+    QJsonObject _action;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemConstructionSite
+// RoomGraphicsItemLab
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemConstructionSite : public TRoomGraphicsItem<ConstructionSiteEntity> {
-    typedef TRoomGraphicsItem<ConstructionSiteEntity> _super;
-
-    static const int FADE_DURATION                  = 1000 * 3;
+class RoomGraphicsItemLab : public TRoomGraphicsItem<LabEntity> {
+    typedef TRoomGraphicsItem<LabEntity> _super;
 
 public:
-    RoomGraphicsItemConstructionSite(const ConstructionSiteEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemConstructionSite();
+    RoomGraphicsItemLab(const LabEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemLab();
 
 private:
-    QPropertyAnimation* _opacityAnimation;
-    ConstructionSiteRenderer _constructionSiteRenderer;
+    LabRenderer _labRenderer;
 
     //
     // TRoomGraphicsItem
@@ -68,7 +75,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const ConstructionSiteEntity& current, const ConstructionSiteEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const LabEntity& current, const LabEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMCONSTRUCTIONSITE_H
+#endif // _ROOMGRAPHICSITEMLAB_H

@@ -30,7 +30,7 @@
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
 #include "GraphicsItemEnergyBeam.h"
-#include "ui/widgets/room/renderers/TowerRenderer.h"
+#include "ui/scenes/room/renderers/TowerRenderer.h"
 
 //{
 //    "_id": "5bad769f3686861efc4ccc44",

@@ -1,6 +1,6 @@
 /*
- * File: RoomGraphicsItemStorage.h
- * Created: 2019-1-2
+ * File: RoomGraphicsItemTerminal.h
+ * Created: 2019-1-18
  *
  * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
@@ -21,22 +21,22 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMSTORAGE_H
-#define _ROOMGRAPHICSITEMSTORAGE_H
+#ifndef _ROOMGRAPHICSITEMTERMINAL_H
+#define _ROOMGRAPHICSITEMTERMINAL_H
 
 #include "RoomGraphicsItem.h"
 #include "GraphicsItemGlow.h"
-#include "ui/widgets/room/renderers/StorageRenderer.h"
+#include "ui/scenes/room/renderers/TerminalRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// StorageEntity
+// TerminalEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class StorageEntity : public StorageRoomEntity {
+class TerminalEntity : public StorageRoomEntity {
     typedef StorageRoomEntity _super;
 
 public:
-    StorageEntity(const RoomEntity& entity)
+    TerminalEntity(const RoomEntity& entity)
         : _super(entity) {
 
     }
@@ -61,21 +61,21 @@ public:
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemStorage
+// RoomGraphicsItemTerminal
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemStorage : public TRoomGraphicsItem<StorageEntity> {
-    typedef TRoomGraphicsItem<StorageEntity> _super;
+class RoomGraphicsItemTerminal : public TRoomGraphicsItem<TerminalEntity> {
+    typedef TRoomGraphicsItem<TerminalEntity> _super;
 
     static constexpr qreal GLOW_EFFECT_SCALE    = 2.0;
     static constexpr qreal GLOW_EFFECT_OPACITY  = 0.5;
 
 public:
-    RoomGraphicsItemStorage(const StorageEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemStorage();
+    RoomGraphicsItemTerminal(const TerminalEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemTerminal();
 
 private:
-    StorageRenderer _storageRenderer;
+    TerminalRenderer _terminalRenderer;
     GraphicsItemGlow _glow;
 
     //
@@ -84,8 +84,7 @@ private:
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const StorageEntity& current, const StorageEntity& updated) Q_DECL_OVERRIDE;
-
+    bool beginUpdate(const TerminalEntity& current, const TerminalEntity& updated) Q_DECL_OVERRIDE;
 };
 
-#endif // _ROOMGRAPHICSITEMSTORAGE_H
+#endif // _ROOMGRAPHICSITEMTERMINAL_H

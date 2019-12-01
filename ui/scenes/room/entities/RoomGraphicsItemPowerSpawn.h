@@ -1,8 +1,8 @@
 /*
- * File: RoomGraphicsItemExtension.h
- * Created: 2018-12-12
+ * File: RoomGraphicsItemPowerSpawn.h
+ * Created: 2019-1-31
  *
- * Copyright (c) shecks 2018 <shecks@gmail.com>
+ * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
  *
  * This file is part of %QT_PROJECT_NAME%.
@@ -21,74 +21,57 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROOMGRAPHICSITEMEXTENSION_H
-#define _ROOMGRAPHICSITEMEXTENSION_H
+#ifndef _ROOMGRAPHICSITEMPOWERSPAWN_H
+#define _ROOMGRAPHICSITEMPOWERSPAWN_H
 
 #include <QPropertyAnimation>
 
 #include "RoomGraphicsItem.h"
-#include "GraphicsItemGlow.h"
-#include "ui/widgets/room/renderers/ExtensionRenderer.h"
+#include "ui/scenes/room/renderers/PowerSpawnRenderer.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// ExtensionEntity
+// PowerSpawnEntity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class ExtensionEntity : public StorageRoomEntity {
+class PowerSpawnEntity : public StorageRoomEntity {
     typedef StorageRoomEntity _super;
 
 public:
-    ExtensionEntity(const RoomEntity& entity)
+    PowerSpawnEntity(const RoomEntity& entity)
         : _super(entity) {
-
     }
 
     int energy() const                  { return getStoredResourceAmount("energy"); }
     int energyCapacity() const          { return getStoredResourceCapacity("energy"); }
+
+    int power() const                   { return getStoredResourceAmount("power"); }
+    int powerCapacity() const           { return getStoredResourceCapacity("power"); }
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoomGraphicsItemExtension
+// RoomGraphicsItemPowerSpawn
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoomGraphicsItemExtension : public TRoomGraphicsItem<ExtensionEntity> {
-    typedef TRoomGraphicsItem<ExtensionEntity> _super;
+class RoomGraphicsItemPowerSpawn : public TRoomGraphicsItem<PowerSpawnEntity> {
+    typedef TRoomGraphicsItem<PowerSpawnEntity> _super;
 
-    static constexpr qreal GLOW_EFFECT_SCALE    = 1.3;
-    static constexpr qreal GLOW_EFFECT_OPACITY  = 0.2;
+    static const int SPAWN_ANIMATION_DURATION   = 3000;
 
 public:
-    RoomGraphicsItemExtension(const ExtensionEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
-    virtual ~RoomGraphicsItemExtension();
+    RoomGraphicsItemPowerSpawn(const PowerSpawnEntity& entity, const QSize& cellSize, QGraphicsItem* parent = nullptr);
+    virtual ~RoomGraphicsItemPowerSpawn();
 
 private:
-    ExtensionRenderer _extensionRenderer;
-    GraphicsItemGlow _glow;
+    PowerSpawnRenderer _powerSpawnRenderer;
+
+    //
+    // TRoomGraphicsItem
+    //
 
     QSizeF itemSize(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void paintItem(QPainter* painter, const QStyleOptionGraphicsItem* option, const QRectF& bounds) Q_DECL_OVERRIDE;
-    bool beginUpdate(const ExtensionEntity& current, const ExtensionEntity& updated) Q_DECL_OVERRIDE;
+    bool beginUpdate(const PowerSpawnEntity& current, const PowerSpawnEntity& updated) Q_DECL_OVERRIDE;
 };
 
-//"61fd98d5fcc0e8b": {
-//      "$loki": 3292,
-//      "_id": "61fd98d5fcc0e8b",
-//      "energy": 50,
-//      "energyCapacity": 50,
-//      "hits": 1000,
-//      "hitsMax": 1000,
-//      "meta": {
-//        "created": 1544469438412,
-//        "revision": 51,
-//        "updated": 1544578854158,
-//        "version": 0
-//      },
-//      "notifyWhenAttacked": true,
-//      "off": false,
-//      "room": "W8N3",
-//      "type": "extension",
-//      "user": "c2b3bdb9a49482e",
-//      "x": 8,
-//      "y": 9
-//    },
-#endif // _ROOMGRAPHICSITEMEXTENSION_H
+
+#endif // _ROOMGRAPHICSITEMPOWERSPAWN_H

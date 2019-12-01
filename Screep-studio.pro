@@ -51,81 +51,81 @@ SOURCES += \
     network/socket/SocketEventUser.cpp \
     network/socket/SocketEventRoom.cpp \
     network/rest/RestRoomTerrain.cpp \
-    ui/widgets/room/RoomGraphicsView.cpp \
-    ui/widgets/room/RoomGraphicsScene.cpp \
-    ui/widgets/room/entities/RoomGraphicsItem.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemCreep.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemConstructionSite.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemSource.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemUnknown.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemSpawn.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemController.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemMineral.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemExtension.cpp \
+    ui/scenes/room/RoomGraphicsView.cpp \
+    ui/scenes/room/RoomGraphicsScene.cpp \
+    ui/scenes/room/entities/RoomGraphicsItem.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemCreep.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemConstructionSite.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemSource.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemUnknown.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemSpawn.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemController.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemMineral.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemExtension.cpp \
     Preferences.cpp \
     models/room/StateMachineOpen.cpp \
     utils/JSONTreeModel.cpp \
     ui/widgets/InspectorWidget.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemWall.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemWall.cpp \
     ui/widgets/CreepViewWidget.cpp \
     ScreepsApi.cpp \
-    ui/widgets/room/entities/GraphicsItemSelection.cpp \
-    ui/widgets/room/utils/Tileset.cpp \
-    ui/widgets/room/utils/TerrainTileset.cpp \
-    ui/widgets/room/terrain/TerrainRenderer.cpp \
-    ui/widgets/room/terrain/ClassicTerrainRenderer.cpp \
-    ui/widgets/room/terrain/TiledTerrainRenderer.cpp \
+    ui/scenes/room/entities/GraphicsItemSelection.cpp \
+    ui/scenes/room/utils/Tileset.cpp \
+    ui/scenes/room/utils/TerrainTileset.cpp \
+    ui/scenes/room/terrain/TerrainRenderer.cpp \
+    ui/scenes/room/terrain/ClassicTerrainRenderer.cpp \
+    ui/scenes/room/terrain/TiledTerrainRenderer.cpp \
     network/rest/RestRoomStatus.cpp \
     network/rest/RestConsoleCommand.cpp \
     ui/widgets/ToolboxWidget.cpp \
-    ui/widgets/room/renderers/EntityRenderer.cpp \
-    ui/widgets/room/renderers/SpawnRenderer.cpp \
-    ui/widgets/room/renderers/ExtensionRenderer.cpp \
-    ui/widgets/room/renderers/CreepRenderer.cpp \
-    ui/widgets/room/renderers/UnknownRenderer.cpp \
-    ui/widgets/room/renderers/MineralRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemTombstone.cpp \
-    ui/widgets/room/renderers/TombstoneRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemTower.cpp \
-    ui/widgets/room/renderers/TowerRenderer.cpp \
-    ui/widgets/room/entities/GraphicsItemEnergyBeam.cpp \
+    ui/scenes/room/renderers/EntityRenderer.cpp \
+    ui/scenes/room/renderers/SpawnRenderer.cpp \
+    ui/scenes/room/renderers/ExtensionRenderer.cpp \
+    ui/scenes/room/renderers/CreepRenderer.cpp \
+    ui/scenes/room/renderers/UnknownRenderer.cpp \
+    ui/scenes/room/renderers/MineralRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemTombstone.cpp \
+    ui/scenes/room/renderers/TombstoneRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemTower.cpp \
+    ui/scenes/room/renderers/TowerRenderer.cpp \
+    ui/scenes/room/entities/GraphicsItemEnergyBeam.cpp \
     ui/widgets/InvasionWidget.cpp \
-    ui/widgets/room/renderers/SourceRenderer.cpp \
-    ui/widgets/room/renderers/ConstructionSiteRenderer.cpp \
-    ui/widgets/room/entities/GraphicsItemGlow.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemStorage.cpp \
-    ui/widgets/room/renderers/StorageRenderer.cpp \
+    ui/scenes/room/renderers/SourceRenderer.cpp \
+    ui/scenes/room/renderers/ConstructionSiteRenderer.cpp \
+    ui/scenes/room/entities/GraphicsItemGlow.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemStorage.cpp \
+    ui/scenes/room/renderers/StorageRenderer.cpp \
     network/rest/RestAuthentication.cpp \
     models/room/RoomEntityModel.cpp \
     models/room/RoomUtils.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemRoad.cpp \
-    ui/widgets/room/renderers/RoadRenderer.cpp \
-    ui/widgets/room/renderers/ControllerRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemContainer.cpp \
-    ui/widgets/room/renderers/ContainerRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemExtractor.cpp \
-    ui/widgets/room/renderers/ExtractorRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemRoad.cpp \
+    ui/scenes/room/renderers/RoadRenderer.cpp \
+    ui/scenes/room/renderers/ControllerRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemContainer.cpp \
+    ui/scenes/room/renderers/ContainerRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemExtractor.cpp \
+    ui/scenes/room/renderers/ExtractorRenderer.cpp \
     models/room/RoomEntity.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemLink.cpp \
-    ui/widgets/room/renderers/LinkRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemEnergy.cpp \
-    ui/widgets/room/renderers/EnergyRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemTerminal.cpp \
-    ui/widgets/room/renderers/TerminalRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemLab.cpp \
-    ui/widgets/room/renderers/LabRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemNuker.cpp \
-    ui/widgets/room/renderers/NukerRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemRampart.cpp \
-    ui/widgets/room/renderers/RampartRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemLink.cpp \
+    ui/scenes/room/renderers/LinkRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemEnergy.cpp \
+    ui/scenes/room/renderers/EnergyRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemTerminal.cpp \
+    ui/scenes/room/renderers/TerminalRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemLab.cpp \
+    ui/scenes/room/renderers/LabRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemNuker.cpp \
+    ui/scenes/room/renderers/NukerRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemRampart.cpp \
+    ui/scenes/room/renderers/RampartRenderer.cpp \
     utils/PaintUtils.cpp \
-    ui/widgets/room/renderers/WallRenderer.cpp \
+    ui/scenes/room/renderers/WallRenderer.cpp \
     models/world/WorldModel.cpp \
     network/rest/GameInfo.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemPowerSpawn.cpp \
-    ui/widgets/room/renderers/PowerSpawnRenderer.cpp \
-    ui/widgets/room/entities/RoomGraphicsItemObserver.cpp \
-    ui/widgets/room/renderers/ObserverRenderer.cpp
+    ui/scenes/room/entities/RoomGraphicsItemPowerSpawn.cpp \
+    ui/scenes/room/renderers/PowerSpawnRenderer.cpp \
+    ui/scenes/room/entities/RoomGraphicsItemObserver.cpp \
+    ui/scenes/room/renderers/ObserverRenderer.cpp
 
 HEADERS += \
         MainWindow.h \
@@ -153,81 +153,81 @@ HEADERS += \
     network/socket/SocketEventUser.h \
     network/socket/SocketEventRoom.h \
     network/rest/RestRoomTerrain.h \
-    ui/widgets/room/RoomGraphicsView.h \
-    ui/widgets/room/RoomGraphicsScene.h \
-    ui/widgets/room/entities/RoomGraphicsItem.h \
-    ui/widgets/room/entities/RoomGraphicsItemCreep.h \
-    ui/widgets/room/entities/RoomGraphicsItemConstructionSite.h \
-    ui/widgets/room/entities/RoomGraphicsItemSource.h \
-    ui/widgets/room/entities/RoomGraphicsItemUnknown.h \
-    ui/widgets/room/entities/RoomGraphicsItemSpawn.h \
-    ui/widgets/room/entities/RoomGraphicsItemController.h \
-    ui/widgets/room/entities/RoomGraphicsItemMineral.h \
-    ui/widgets/room/entities/RoomGraphicsItemExtension.h \
+    ui/scenes/room/RoomGraphicsView.h \
+    ui/scenes/room/RoomGraphicsScene.h \
+    ui/scenes/room/entities/RoomGraphicsItem.h \
+    ui/scenes/room/entities/RoomGraphicsItemCreep.h \
+    ui/scenes/room/entities/RoomGraphicsItemConstructionSite.h \
+    ui/scenes/room/entities/RoomGraphicsItemSource.h \
+    ui/scenes/room/entities/RoomGraphicsItemUnknown.h \
+    ui/scenes/room/entities/RoomGraphicsItemSpawn.h \
+    ui/scenes/room/entities/RoomGraphicsItemController.h \
+    ui/scenes/room/entities/RoomGraphicsItemMineral.h \
+    ui/scenes/room/entities/RoomGraphicsItemExtension.h \
     Preferences.h \
     models/room/StateMachineOpen.h \
     utils/JSONTreeModel.h \
     ui/widgets/InspectorWidget.h \
-    ui/widgets/room/entities/RoomGraphicsItemWall.h \
+    ui/scenes/room/entities/RoomGraphicsItemWall.h \
     ui/widgets/CreepViewWidget.h \
     ScreepsApi.h \
-    ui/widgets/room/entities/GraphicsItemSelection.h \
-    ui/widgets/room/utils/Tileset.h \
-    ui/widgets/room/utils/TerrainTileset.h \
-    ui/widgets/room/terrain/TerrainRenderer.h \
-    ui/widgets/room/terrain/ClassicTerrainRenderer.h \
-    ui/widgets/room/terrain/TiledTerrainRenderer.h \
+    ui/scenes/room/entities/GraphicsItemSelection.h \
+    ui/scenes/room/utils/Tileset.h \
+    ui/scenes/room/utils/TerrainTileset.h \
+    ui/scenes/room/terrain/TerrainRenderer.h \
+    ui/scenes/room/terrain/ClassicTerrainRenderer.h \
+    ui/scenes/room/terrain/TiledTerrainRenderer.h \
     network/rest/RestRoomStatus.h \
     network/rest/RestConsoleCommand.h \
     ui/widgets/ToolboxWidget.h \
-    ui/widgets/room/renderers/EntityRenderer.h \
-    ui/widgets/room/renderers/SpawnRenderer.h \
-    ui/widgets/room/renderers/ExtensionRenderer.h \
-    ui/widgets/room/renderers/CreepRenderer.h \
-    ui/widgets/room/renderers/UnknownRenderer.h \
-    ui/widgets/room/renderers/MineralRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemTombstone.h \
-    ui/widgets/room/renderers/TombstoneRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemTower.h \
-    ui/widgets/room/renderers/TowerRenderer.h \
-    ui/widgets/room/entities/GraphicsItemEnergyBeam.h \
+    ui/scenes/room/renderers/EntityRenderer.h \
+    ui/scenes/room/renderers/SpawnRenderer.h \
+    ui/scenes/room/renderers/ExtensionRenderer.h \
+    ui/scenes/room/renderers/CreepRenderer.h \
+    ui/scenes/room/renderers/UnknownRenderer.h \
+    ui/scenes/room/renderers/MineralRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemTombstone.h \
+    ui/scenes/room/renderers/TombstoneRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemTower.h \
+    ui/scenes/room/renderers/TowerRenderer.h \
+    ui/scenes/room/entities/GraphicsItemEnergyBeam.h \
     ui/widgets/InvasionWidget.h \
-    ui/widgets/room/renderers/SourceRenderer.h \
-    ui/widgets/room/renderers/ConstructionSiteRenderer.h \
-    ui/widgets/room/entities/GraphicsItemGlow.h \
-    ui/widgets/room/entities/RoomGraphicsItemStorage.h \
-    ui/widgets/room/renderers/StorageRenderer.h \
+    ui/scenes/room/renderers/SourceRenderer.h \
+    ui/scenes/room/renderers/ConstructionSiteRenderer.h \
+    ui/scenes/room/entities/GraphicsItemGlow.h \
+    ui/scenes/room/entities/RoomGraphicsItemStorage.h \
+    ui/scenes/room/renderers/StorageRenderer.h \
     network/rest/RestAuthentication.h \
     models/room/RoomEntityModel.h \
     models/room/RoomUtils.h \
-    ui/widgets/room/entities/RoomGraphicsItemRoad.h \
-    ui/widgets/room/renderers/RoadRenderer.h \
-    ui/widgets/room/renderers/ControllerRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemContainer.h \
-    ui/widgets/room/renderers/ContainerRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemExtractor.h \
-    ui/widgets/room/renderers/ExtractorRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemRoad.h \
+    ui/scenes/room/renderers/RoadRenderer.h \
+    ui/scenes/room/renderers/ControllerRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemContainer.h \
+    ui/scenes/room/renderers/ContainerRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemExtractor.h \
+    ui/scenes/room/renderers/ExtractorRenderer.h \
     models/room/RoomEntity.h \
-    ui/widgets/room/entities/RoomGraphicsItemLink.h \
-    ui/widgets/room/renderers/LinkRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemEnergy.h \
-    ui/widgets/room/renderers/EnergyRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemTerminal.h \
-    ui/widgets/room/renderers/TerminalRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemLab.h \
-    ui/widgets/room/renderers/LabRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemNuker.h \
-    ui/widgets/room/renderers/NukerRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemRampart.h \
-    ui/widgets/room/renderers/RampartRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemLink.h \
+    ui/scenes/room/renderers/LinkRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemEnergy.h \
+    ui/scenes/room/renderers/EnergyRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemTerminal.h \
+    ui/scenes/room/renderers/TerminalRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemLab.h \
+    ui/scenes/room/renderers/LabRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemNuker.h \
+    ui/scenes/room/renderers/NukerRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemRampart.h \
+    ui/scenes/room/renderers/RampartRenderer.h \
     utils/PaintUtils.h \
-    ui/widgets/room/renderers/WallRenderer.h \
+    ui/scenes/room/renderers/WallRenderer.h \
     models/world/WorldModel.h \
     network/rest/GameInfo.h \
-    ui/widgets/room/entities/RoomGraphicsItemPowerSpawn.h \
-    ui/widgets/room/renderers/PowerSpawnRenderer.h \
-    ui/widgets/room/entities/RoomGraphicsItemObserver.h \
-    ui/widgets/room/renderers/ObserverRenderer.h
+    ui/scenes/room/entities/RoomGraphicsItemPowerSpawn.h \
+    ui/scenes/room/renderers/PowerSpawnRenderer.h \
+    ui/scenes/room/entities/RoomGraphicsItemObserver.h \
+    ui/scenes/room/renderers/ObserverRenderer.h
 
 FORMS += \
         MainWindow.ui \
