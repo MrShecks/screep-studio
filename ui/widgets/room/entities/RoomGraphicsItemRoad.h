@@ -26,8 +26,8 @@
 
 #include "RoomGraphicsItem.h"
 #include "../renderers/RoadRenderer.h"
-#include "../../../models/room/RoomUtils.h"
-#include "../../../utils/JSONUtils.h"
+#include "models/room/RoomUtils.h"
+#include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RoadEntity

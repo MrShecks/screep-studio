@@ -26,7 +26,7 @@
 #include <QMap>
 
 #include "RoomGraphicsItemCreep.h"
-#include "../../../utils/JSONUtils.h"
+#include "utils/JSONUtils.h"
 
 #include <QDebug>
 

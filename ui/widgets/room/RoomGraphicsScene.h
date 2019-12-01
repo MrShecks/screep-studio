@@ -29,7 +29,8 @@
 #include <QPixmap>
 #include <QMap>
 
-#include "../../models/room/RoomModel.h"
+#include "models/room/RoomModel.h"
+#include "models/room/RoomEntity.h"
 #include "./entities/RoomGraphicsItem.h"
 #include "./terrain/ClassicTerrainRenderer.h"
 #include "./terrain/TiledTerrainRenderer.h"

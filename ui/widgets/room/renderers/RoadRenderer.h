@@ -1,6 +1,6 @@
 /*
- * File: RampartRenderer.h
- * Created: 2019-1-24
+ * File: RoadRenderer.h
+ * Created: 2019-1-5
  *
  * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
@@ -21,30 +21,26 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef RAMPARTRENDERER_H
-#define RAMPARTRENDERER_H
-
-#include <QPainterPath>
+#ifndef _ROADRENDERER_H
+#define _ROADRENDERER_H
 
 #include "EntityRenderer.h"
-#include "../../../models/room/RoomUtils.h"
+#include "models/room/RoomUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RampartRenderer
-// Utility class to draw the "Rampart" game entity
+// RoadRenderer
+// Utility class to draw the "road" game entity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RampartRenderer : public EntityRenderer {
+class RoadRenderer : public EntityRenderer {
     typedef EntityRenderer _super;
 
-    static constexpr qreal ENTITY_OPACITY       = 0.2f;
-
-    static const int BORDER_PEN_SCALE           = 4;
+    static const int PEN_WIDTH                  = 10;       // Pixels
 
 public:
 
-    RampartRenderer(QObject* parent = nullptr);
-    virtual ~RampartRenderer();
+    RoadRenderer(QObject* parent = nullptr);
+    virtual ~RoadRenderer();
 
     void setNeighbours(RoomUtils::NeighbourFlags neighbours);
 
@@ -55,23 +51,14 @@ public:
     QSizeF size(const QSize& cellSize) const Q_DECL_OVERRIDE;
     void draw(QPainter* painter, const QRectF& bounds) const Q_DECL_OVERRIDE;
 
-    void setOpacity(qreal opacity);
-
     //
-    // RampartRenderer
+    // RoadRenderer
     //
 
     static QImage toImage(const QSize& size, QColor fillColor = Qt::white, const QSize& border = QSize());
 
 private:
-    mutable QPainterPath _rampartPath;
-    mutable QPainterPath _edgePath;
-    qreal _opacity;
-
     RoomUtils::NeighbourFlags _neighbours;
-
-    QPainterPath basePath(const QRectF& rect, RoomUtils::NeighbourFlags neighbours) const;
-    QPainterPath edgePath(const QRectF& rect, RoomUtils::NeighbourFlags neighbours, qreal penWidth) const;
 };
 
-#endif // RAMPARTRENDERER_H
+#endif // _ROADRENDERER_H

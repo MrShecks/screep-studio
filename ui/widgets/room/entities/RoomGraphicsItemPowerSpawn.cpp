@@ -24,7 +24,7 @@
 #include <QPainter>
 
 #include "RoomGraphicsItemPowerSpawn.h"
-#include "../../../utils/JSONUtils.h"
+#include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PowerSpawnEntity

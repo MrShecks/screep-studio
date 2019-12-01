@@ -26,7 +26,7 @@
 
 #include "RoomGraphicsItemTower.h"
 #include "GraphicsItemEnergyBeam.h"
-#include "../../../utils/JSONUtils.h"
+#include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TowerEntity

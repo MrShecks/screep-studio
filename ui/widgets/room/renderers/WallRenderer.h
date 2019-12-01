@@ -1,6 +1,6 @@
 /*
- * File: RoadRenderer.h
- * Created: 2019-1-5
+ * File: WallRenderer.h
+ * Created: 2019-1-27
  *
  * Copyright (c) shecks 2019 <shecks@gmail.com>
  * All rights reserved.
@@ -21,26 +21,26 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _ROADRENDERER_H
-#define _ROADRENDERER_H
+#ifndef _WALLRENDERER_H
+#define _WALLRENDERER_H
+
+#include <QPainterPath>
 
 #include "EntityRenderer.h"
-#include "../../../models/room/RoomUtils.h"
+#include "models/room/RoomUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// RoadRenderer
-// Utility class to draw the "road" game entity
+// WallRenderer
+// Utility class to draw the "Constructed Wall" game entity
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class RoadRenderer : public EntityRenderer {
+class WallRenderer : public EntityRenderer {
     typedef EntityRenderer _super;
-
-    static const int PEN_WIDTH                  = 10;       // Pixels
 
 public:
 
-    RoadRenderer(QObject* parent = nullptr);
-    virtual ~RoadRenderer();
+    WallRenderer(QObject* parent = nullptr);
+    virtual ~WallRenderer();
 
     void setNeighbours(RoomUtils::NeighbourFlags neighbours);
 
@@ -52,13 +52,17 @@ public:
     void draw(QPainter* painter, const QRectF& bounds) const Q_DECL_OVERRIDE;
 
     //
-    // RoadRenderer
+    // WallRenderer
     //
 
     static QImage toImage(const QSize& size, QColor fillColor = Qt::white, const QSize& border = QSize());
 
 private:
+    mutable QPainterPath _wallPath;
+
     RoomUtils::NeighbourFlags _neighbours;
+
+    QPainterPath basePath(const QRectF& rect, RoomUtils::NeighbourFlags neighbours) const;
 };
 
-#endif // _ROADRENDERER_H
+#endif // _WALLRENDERER_H

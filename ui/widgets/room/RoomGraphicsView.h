@@ -1,6 +1,6 @@
 /*
- * File: TerrainRenderer.h
- * Created: 2018-12-24
+ * File: RoomGraphicsView.h
+ * Created: 2018-12-11
  *
  * Copyright (c) shecks 2018 <shecks@gmail.com>
  * All rights reserved.
@@ -21,41 +21,59 @@
  * along with %QT_PROJECT_NAME%.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef _TERRAINRENDERER_H
-#define _TERRAINRENDERER_H
+#ifndef _ROOMGRAPHICSVIEW_H
+#define _ROOMGRAPHICSVIEW_H
 
-#include "../../../models/room/RoomTerrainModel.h"
+#include <QGraphicsView>
+
+#include "RoomGraphicsScene.h"
+#include "models/room/RoomModel.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class QGraphicsScene;
+#define _DEBUG_GRAPHICS_VIEW        1
+#define _DEBUG_PRINT_SCENE          _DEBUG_GRAPHICS_VIEW && 1
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// TerrainRenderer
+// RoomGraphicsView
+// Custom QGraphicsView used to render and interact with the room scene (RoomGraphicsScene)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-class TerrainRenderer {
+class RoomGraphicsView : public QGraphicsView {
+    typedef QGraphicsView _super;
+
+    Q_OBJECT
 
 public:
-    TerrainRenderer(const QGraphicsScene* scene, int cellWidth, int cellHeight);
-    virtual ~TerrainRenderer();
+    RoomGraphicsView(RoomModel::TSharedPtr roomModel, QWidget* parent = nullptr);
+    virtual ~RoomGraphicsView();
 
-    virtual void beginRender(QPainter* painter, const QRectF& rect);
-    virtual void endRender(QPainter* painter, const QRectF& rect);
+    void open();
+    void close();
 
-    virtual void drawCell(QPainter* painter, const QRectF& cellRect, Screeps::TerrainFlags terrainFlags, RoomUtils::NeighbourFlags flags) = 0;
+    void setModel(RoomModel::TSharedPtr roomModel);
 
-protected:
-    const QGraphicsScene* scene() const         { return _scene; }
+    //
+    // QGraphicsView
+    //
 
-    int cellWidth() const                       { return _cellWidth; }
-    int cellHeight() const                      { return _cellHeight; }
+    void wheelEvent(QWheelEvent* event);
+#if _DEBUG_PRINT_SCENE
+    void keyReleaseEvent(QKeyEvent* event);
+#endif // _DEBUG_PRINT_SCENE
+
+signals:
+    void itemSelected(const RoomGraphicsItem& item);
+
+public slots:
+    void showGrid(bool show);
+
+private slots:
+    void _onSelectionChanged();
 
 private:
-    const QGraphicsScene* _scene;
-
-    int _cellWidth;
-    int _cellHeight;
+    RoomGraphicsScene _roomScene;
+    RoomModel::TSharedPtr _roomModel;
 };
 
-#endif // _TERRAINRENDERER_H
+#endif // _ROOMGRAPHICSVIEW_H

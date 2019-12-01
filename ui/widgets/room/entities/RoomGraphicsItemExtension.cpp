@@ -24,7 +24,7 @@
 #include <QPainter>
 
 #include "RoomGraphicsItemExtension.h"
-#include "../../../utils/JSONUtils.h"
+#include "../../../../utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RoomGraphicsItemExtension

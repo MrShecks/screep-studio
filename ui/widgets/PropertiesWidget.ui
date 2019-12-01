@@ -46,7 +46,7 @@
   <customwidget>
    <class>CreepViewWidget</class>
    <extends>QWidget</extends>
-   <header>./widgets/CreepViewWidget.h</header>
+   <header>./ui/widgets/CreepViewWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -24,7 +24,7 @@
 #include <QPainter>
 
 #include "RoomGraphicsItemMineral.h"
-#include "../../../utils/JSONUtils.h"
+#include "utils/JSONUtils.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // RoomGraphicsItemMineral

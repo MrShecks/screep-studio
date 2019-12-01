@@ -237,31 +237,31 @@
   <customwidget>
    <class>ConsoleWidget</class>
    <extends>QWidget</extends>
-   <header>./widgets/ConsoleWidget.h</header>
+   <header>./ui/widgets/ConsoleWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>PropertiesWidget</class>
    <extends>QWidget</extends>
-   <header>./widgets/PropertiesWidget.h</header>
+   <header>./ui/widgets/PropertiesWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>InspectorWidget</class>
    <extends>QWidget</extends>
-   <header>./widgets/InspectorWidget.h</header>
+   <header>./ui/widgets/InspectorWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>ToolboxWidget</class>
    <extends>QWidget</extends>
-   <header>./widgets/ToolboxWidget.h</header>
+   <header>./ui/widgets/ToolboxWidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>InvasionWidget</class>
    <extends>QWidget</extends>
-   <header>./widgets/InvasionWidget.h</header>
+   <header>./ui/widgets/InvasionWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -30,10 +30,10 @@
 
 #include "./ui/dialogs/ConnectDialog.h"
 
-#include "./widgets/PropertiesWidget.h"
-#include "./widgets/InvasionWidget.h"
-#include "./widgets/ConsoleWidget.h"
-#include "./widgets/room/RoomGraphicsView.h"
+#include "./ui/widgets/PropertiesWidget.h"
+#include "./ui/widgets/InvasionWidget.h"
+#include "./ui/widgets/ConsoleWidget.h"
+#include "./ui/widgets/room/RoomGraphicsView.h"
 
 #include "ui_MainWindow.h"
 
