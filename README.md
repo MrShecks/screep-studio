@@ -29,6 +29,17 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
 
 - A toolbox panel containing the various game entities available for construction. Note: This is currently read-only.  
 
+## TODO (Current priorities):
+
+- Refamiliarise myself with the code and clean up the structure so I can continue working on it (it's been over a
+  year since I did anything significant with the code base so it doesn't even feel like my own code)
+
+- Add UI to setup server connections and authentication methods and allow the user to login/connect without having to
+  hack the code.
+
+- Re-work the network code. It really needs to be more robust and the connection sequence is a mess so I want to move
+  to a state machine based approach (See [QStateMachine](https://doc.qt.io/qt-5/qstatemachine.html))
+
 ## Know Issues:
 
 - Due to a bug in how the Qt Framework resolves the OpenSSL libraries the client will fail to connect to
@@ -48,7 +59,7 @@ logging on or opening rooms, for the moment this is hard-coded in [ScreepStudioA
       [Security]
       authKey=<Your authentication token here>
 
-  Information on obtaining an authorisation token can be found here https://docs.screeps.com/auth-tokens.html
+  Information on obtaining an authorisation token can be found [here](https://docs.screeps.com/auth-tokens.html)
 
 - There's a lot of DEBUG code and partially implemented features in the source.
 
@@ -64,7 +75,7 @@ A short video showing the client running can be found [here](https://youtu.be/dZ
 There's also a playlist showing the development of Screep Studio [here](https://www.youtube.com/playlist?list=PLxFqsJkRoZf8zN44B-1vD27toUQzQdZmc)
 
 ### Screenshot 1
-![Screep Studio](screenshots/screep-studio-001.png)
+![Screep Studio](docs/screenshots/screep-studio-001.png)
 
 ### Screenshot 2
-![Screep Studio](screenshots/screep-studio-002.png)
+![Screep Studio](docs/screenshots/screep-studio-002.png)
