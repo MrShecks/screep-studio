@@ -44,41 +44,45 @@ Request information about the server.
   Example 1
   Basic information as currently returned from the live server.
 
-    {
-      "ok": 1,
-      "package": 145,
-      "protocol": 13,
-      "serverData": {
-        "historyChunkSize": 100,
-        "shards": [
-          "shard0",
-          "shard1",
-          "shard2",
-          "shard3"
-        ]
-      }
-    }
+```json
+{
+  "ok": 1,
+  "package": 145,
+  "protocol": 13,
+  "serverData": {
+    "historyChunkSize": 100,
+    "shards": [
+      "shard0",
+      "shard1",
+      "shard2",
+      "shard3"
+    ]
+  }
+}
+```
 
   Example 2    
   Server response from a server providing additional custom information in the "serverData" object.
 
-    {
-        "ok": 1,
-        "protocol": 13,
-        "useNativeAuth": false,
-        "users": 2,
-        "serverData": {
-            "welcomeText": "<h4>Welcome to your own Screeps private server!</h4>This text can be changed by adding a mod to your server, see <code>mods.json</code> file in your server folder.",
-            "customObjectTypes": {},
-            "historyChunkSize": 20,
-            "socketUpdateThrottle": 1000,
-            "renderer": {
-                "resources": {},
-                "metadata": {}
-            }
-        },
-        "packageVersion": "3.1.7"
-    }
+```json
+{
+    "ok": 1,
+    "protocol": 13,
+    "useNativeAuth": false,
+    "users": 2,
+    "serverData": {
+        "welcomeText": "<h4>Welcome to your own Screeps private server!</h4>This text can be changed by adding a mod to your server, see <code>mods.json</code> file in your server folder.",
+        "customObjectTypes": {},
+        "historyChunkSize": 20,
+        "socketUpdateThrottle": 1000,
+        "renderer": {
+            "resources": {},
+            "metadata": {}
+        }
+    },
+    "packageVersion": "3.1.7"
+}
+```
 
 ### Authentication
 ---
@@ -100,17 +104,21 @@ Screeps API authentication tokens/tickets are associated with your Steam signon 
 
 Example
 
-    {
-      "ticket": "df174549-8086-2b9f-94e4-74dd0c4fd555",
-      "useNativeAuth": false
-    }
+```json
+{
+  "ticket": "df174549-8086-2b9f-94e4-74dd0c4fd555",
+  "useNativeAuth": false
+}
+```    
 
 ##### Response Body
 
-    {
-      "ok": 1,
-      "token": "5581204567890abcdef4b56437e687bbe932ed89"
-    }
+```json
+{
+  "ok": 1,
+  "token": "5581204567890abcdef4b56437e687bbe932ed89"
+}
+```    
 
 #### User Sign In
 Authenticate user by signing in with username and password
@@ -129,11 +137,13 @@ Authenticate user by signing in with username and password
 
 Example
 
-    {
-      "username": "screepymacscreepface",
-      "password": "mysecretpassword"
-      "email": "screepy@protonmail.com"
-    }
+```json
+{
+  "username": "screepymacscreepface",
+  "password": "mysecretpassword"
+  "email": "screepy@protonmail.com"
+}
+```
 
 ##### Response Body
 
@@ -146,27 +156,29 @@ Request information about the currently authenticated user
 
 ##### Response Body
 
-    {
-        "_id":"f99b7db35b10edd",
-        "badge":{
-            "color1":"#00770e",
-            "color2":"#ffffff",
-            "color3":"#ffff00",
-            "flip":false,
-            "param":0,
-            "type":3
-        },
-        "blocked":false,
-        "cpu":100,
-        "gcl":0,
-        "money":0,
-        "ok":1,
-        "password":true,
-        "steam":{
-            "id":"55512345678900000"
-        },
-        "username":"Fred"
-    }
+```json
+{
+    "_id":"f99b7db35b10edd",
+    "badge":{
+        "color1":"#00770e",
+        "color2":"#ffffff",
+        "color3":"#ffff00",
+        "flip":false,
+        "param":0,
+        "type":3
+    },
+    "blocked":false,
+    "cpu":100,
+    "gcl":0,
+    "money":0,
+    "ok":1,
+    "password":true,
+    "steam":{
+        "id":"55512345678900000"
+    },
+    "username":"Fred"
+}
+```    
 
 ## Web Socket API
 TODO: Gather up information about the Screeps Web Socket API
