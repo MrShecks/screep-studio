@@ -1,11 +1,11 @@
 # Screeps API
 This file contains my notes on the Screeps game API
 
-The information has been gathered by reading through the Screeps private server source code, various Screeps related open source tools and libraries and<BR>
+The information has been gathered by reading through the Screeps private server source code, various Screeps related open source tools and libraries and
 in some cases, by observing the communication between the Screeps Steam client and server using WireShark.
 
-The Screeps game API consists of two APIs, a web based REST API and a Web Socket API. In general the REST API is used to query static information<BR>
-about the game entities (e.g Server information, world structure, room terrain) and the Web Socket API provides a mechanism to subscribe to<BR>
+The Screeps game API consists of two APIs, a web based REST API and a Web Socket API. In general the REST API is used to query static information
+about the game entities (e.g Server information, world structure, room terrain) and the Web Socket API provides a mechanism to subscribe to
 event streams to receive live notifications of changes applied to game entities.
 
 ## Sources
@@ -26,8 +26,9 @@ E.g
     https://screeps.com:443/api/
     https://192.168.1.50:21025/api/
 
-The default port for private servers is 21025.<BR>
-Throughout the remainder of this document the REST end point will be referred to as <base-endpoint>
+The default port for private servers is 21025.
+
+Throughout the remainder of this document the REST end point will be referred to as \<base-endpoint\>
 
 #### Server Version
 Request information about the server.
