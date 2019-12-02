@@ -26,18 +26,19 @@ E.g
     https://screeps.com:443/api/
     https://192.168.1.50:21025/api/
 
-The default port for private servers is 21025.
+- The default REST API port for private servers is 21025.
+- Unless otherwise noted, all request and response bodies are formatted as JSON.
 
 Throughout the remainder of this document the REST end point will be referred to as \<base-endpoint\>
 
-#### Server Version
+### Server Version
 Request information about the server.
 
-##### HTTP GET
+#### HTTP GET
 
     <base-endpoint>/version
 
-##### Response Body:
+#### Response Body:
 
   Example 1
   Basic information as currently returned from the live server.
