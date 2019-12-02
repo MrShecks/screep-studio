@@ -15,7 +15,7 @@ event streams to receive live notifications of changes applied to game entities.
 
 
 ## REST API
-
+---
 ### Base endpoint
 The base end point for REST calls is formatted as follows:-
 
@@ -32,6 +32,7 @@ E.g
 Throughout the remainder of this document the REST end point will be referred to as \<base-endpoint\>
 
 ### Server Version
+---
 Request information about the server.
 
 #### HTTP GET
@@ -80,7 +81,7 @@ Request information about the server.
     }
 
 ### Authentication
-
+---
 #### Steam Ticket
 Authenticate user via Steam authentication ticket
 
