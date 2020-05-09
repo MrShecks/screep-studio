@@ -76,12 +76,18 @@ ScreepStudioApplication::ScreepStudioApplication(int& argc, char** argv, int fla
     _networkModel->setAuthentication (authKey);
     _networkModel->openConnection("screeps.com", -1, true);
 #else
+
+    _clientModel = new ClientModel("192.168.1.13", 21025, false, this);
+    _clientModel->openConnection("Shecks", "mysecretpassword");
+
     //
     // Note: This is not a real password, well it is but it's for my private server :)
     //
 
-    _networkModel->setAuthentication ("Shecks", "mysecretpassword");
-    _networkModel->openConnection("192.168.1.13", 21025, false);
+//    _networkModel->setAuthentication ("Shecks", "mysecretpassword");
+//    _networkModel->openConnection("192.168.1.13", 21025, false);
+
+
 #endif // CONNECT_LIVE_SERVER
 
     _consoleModel->setModel(_networkModel);

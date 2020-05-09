@@ -139,6 +139,8 @@ class RestNetworkManager : public QObject {
 
 public:
     explicit RestNetworkManager(QObject* parent = nullptr);
+    RestNetworkManager(const QString& host, int port = -1, bool isSecure = false, QObject* parent = nullptr);
+
     virtual ~RestNetworkManager();
 
     void setRequestHeader(const QString& key, const QString& value);

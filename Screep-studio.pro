@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         MainWindow.cpp \
+    models/client/ClientModel.cpp \
     models/room/RoomModel.cpp \
     models/room/RoomTerrainModel.cpp \
     ScreepStudioApplication.cpp \
@@ -129,6 +130,7 @@ SOURCES += \
 
 HEADERS += \
         MainWindow.h \
+    models/client/ClientModel.h \
     models/room/RoomModel.h \
     models/room/RoomTerrainModel.h \
     ScreepStudioApplication.h \

@@ -121,6 +121,8 @@ class SocketNetworkManager : public QObject {
 
 public:
     explicit SocketNetworkManager(QObject* parent = nullptr);
+    SocketNetworkManager(const QString& host, int port = -1, bool isSecure = false, QObject* parent = nullptr);
+
     virtual ~SocketNetworkManager();
 
     void openConnection(const QString& host, int port = -1, bool isSecure = false);

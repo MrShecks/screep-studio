@@ -101,9 +101,30 @@ SocketCommandBuilder::SocketCommandBuilder(const QString& command)
 // SocketNetworkManager
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#if 1
+SocketNetworkManager::SocketNetworkManager(QObject* parent /* = nullptr */)
+    : SocketNetworkManager("", -1, false, parent) {
+
+}
+#else
 SocketNetworkManager::SocketNetworkManager(QObject* parent /* = nullptr */)
     : _super(parent),
       _isConnected(false) {
+
+    connect(&_socket, &QWebSocket::connected, this, &SocketNetworkManager::connected);
+    connect(&_socket, &QWebSocket::disconnected, this, &SocketNetworkManager::disconnected);
+
+    connect(&_socket, &QWebSocket::connected, this, &SocketNetworkManager::onConnected);
+    connect(&_socket, &QWebSocket::disconnected, this, &SocketNetworkManager::onDisconnected);
+    connect(&_socket, &QWebSocket::textMessageReceived, this, &SocketNetworkManager::onTextMessageReceived);
+#if _DBG_SHOW_SERVER_PONG
+    connect(&_socket, &QWebSocket::pong, this, &SocketNetworkManager::onPongReceived);
+#endif // _DBG_SHOW_SERVER_PONG
+}
+#endif
+
+SocketNetworkManager::SocketNetworkManager(const QString& host, int port /* = -1 */, bool isSecure /* = false */, QObject* parent /* = nullptr */)
+    : _super(parent), _isConnected(false) {
 
     connect(&_socket, &QWebSocket::connected, this, &SocketNetworkManager::connected);
     connect(&_socket, &QWebSocket::disconnected, this, &SocketNetworkManager::disconnected);

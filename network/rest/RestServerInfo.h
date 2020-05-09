@@ -38,7 +38,7 @@ class RestRequestServerInfo : public RESTRequestBuilder {
 
 public:
     RestRequestServerInfo()
-        :_super (Screeps::PATH_SERVER_VERSION) {
+        : _super (Screeps::PATH_SERVER_VERSION) {
 
     }
 

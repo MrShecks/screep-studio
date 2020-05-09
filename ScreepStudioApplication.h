@@ -29,6 +29,8 @@
 
 #include "Preferences.h"
 
+#include "models/client/ClientModel.h"
+
 #include "models/NetworkModel.h"
 #include "models/room/RoomModel.h"
 #include "models/world/WorldModel.h"
@@ -79,6 +81,8 @@ private:
     typedef QMap<QString, RoomModel::TSharedPtr> TRoomModelMap;
 
     Preferences _prefs;
+
+    ClientModel* _clientModel;
 
     NetworkModel* _networkModel;
 

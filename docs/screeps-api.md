@@ -142,7 +142,7 @@ Example
 
 ```json
 {
-  "email": "screepy@protonmail.com"
+  "email": "screepy@protonmail.com",
   "password": "mysecretpassword",
 }
 ```
@@ -291,7 +291,7 @@ Example 2: Email address does not exist
 }
 ```
 
-### User Information
+### User
 ---
 #### Find User
 Retrieve information about an existing user by username or ID
@@ -328,6 +328,19 @@ Find user by ID
     }
 }
 ```
+
+#### User Console
+Submit a command to the user console
+
+#### HTTP POST
+
+    <base-endpoint>/user/console?expression=Hello&shard=shard0
+
+#### Response Body
+
+### Game
+---
+
 
 ## Web Socket API
 TODO: Gather up information about the Screeps Web Socket API

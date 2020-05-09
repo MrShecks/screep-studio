@@ -159,6 +159,15 @@ RestNetworkManager::RestNetworkManager(QObject* parent /* = nullptr */)
     connect(&_network, &QNetworkAccessManager::finished, this, &RestNetworkManager::onRequestFinished);
 }
 
+RestNetworkManager::RestNetworkManager(const QString& host, int port /* = -1 */, bool isSecure /* = false */, QObject* /* = nullptr */) {
+
+    _baseRestUrl.setHost(host);
+    _baseRestUrl.setScheme(isSecure ? "https" : "http");
+    _baseRestUrl.setPort(port);
+
+    connect(&_network, &QNetworkAccessManager::finished, this, &RestNetworkManager::onRequestFinished);
+}
+
 RestNetworkManager::~RestNetworkManager() {
 
 }
@@ -194,6 +203,7 @@ void RestNetworkManager::postRequest(const RESTRequestBuilder& requestBuilder) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void RestNetworkManager::openConnection(const QString& host, int port /* = -1 */, bool isSecure /* = false */) {
+
     _baseRestUrl.setHost(host);
     _baseRestUrl.setScheme(isSecure ? "https" : "http");
     _baseRestUrl.setPort(port);
